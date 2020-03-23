@@ -10,24 +10,39 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let GRID_SIZE = 10
+    let GRID_SIZE = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         initializeStacks()
+        initializeButtons()
+        
     }
     
-    var buttons: [UIButton]!
+    var buttons: [UIButton]! = []
     var horizontalStacks: [UIStackView] = []
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print(false)
         super.touchesMoved(touches, with: event)
         guard let touch = event?.allTouches?.first else {return}
-        let touchLocation = touch.location(in: self.view)
         buttons.forEach { (button) in
-            if button.frame.contains(touchLocation) {
-                button.backgroundColor = UIColor.systemRed
+            if button.frame.contains(touch.location(in: button.superview)) {
+                button.backgroundColor = UIColor.systemGreen
+                print(true)
+            }
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print(false)
+        super.touchesBegan(touches, with: event)
+        guard let touch = event?.allTouches?.first else {return}
+        buttons.forEach { (button) in
+            if button.frame.contains(touch.location(in: button.superview)) {
+                button.backgroundColor = UIColor.systemGreen
+                print(true)
             }
         }
     }
@@ -37,6 +52,7 @@ class ViewController: UIViewController {
         verticalStack.axis = .vertical
         verticalStack.alignment = .fill
         verticalStack.distribution = .fillEqually
+        verticalStack.spacing = 3
         
         let verticalStackConstraints: [NSLayoutConstraint] = [
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor, constant: 20),
@@ -56,14 +72,125 @@ class ViewController: UIViewController {
             horizontalStackView.axis = .horizontal
             horizontalStackView.alignment = .fill
             horizontalStackView.distribution = .fillEqually
-
+            horizontalStackView.spacing = 3
             horizontalStacks.append(horizontalStackView)
             verticalStack.addArrangedSubview(horizontalStackView)
         }
         
     }
     
-    
+    func initializeButtons() {
+        for horizontalStack in horizontalStacks {
+            for _ in 1...GRID_SIZE {
+                let button = UIButton()
+                button.backgroundColor = UIColor.systemGray
+                button.cornerRadius = 3
+                
+                horizontalStack.addArrangedSubview(button)
+                buttons.append(button)
+                
+            }
+        }
+    }
     
 }
 
+@IBDesignable
+class DesignableView: UIView {
+}
+
+@IBDesignable
+class DesignableButton: UIButton {
+    
+}
+
+@IBDesignable
+class DesignableLabel: UILabel {
+}
+
+extension UIView {
+    
+    @IBInspectable
+    var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+        }
+    }
+
+    @IBInspectable
+    var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+    
+    @IBInspectable
+    var borderColor: UIColor? {
+        get {
+            if let color = layer.borderColor {
+                return UIColor(cgColor: color)
+            }
+            return nil
+        }
+        set {
+            if let color = newValue {
+                layer.borderColor = color.cgColor
+            } else {
+                layer.borderColor = nil
+            }
+        }
+    }
+    
+    @IBInspectable
+    var shadowRadius: CGFloat {
+        get {
+            return layer.shadowRadius
+        }
+        set {
+            layer.shadowRadius = newValue
+        }
+    }
+    
+    @IBInspectable
+    var shadowOpacity: Float {
+        get {
+            return layer.shadowOpacity
+        }
+        set {
+            layer.shadowOpacity = newValue
+        }
+    }
+    
+    @IBInspectable
+    var shadowOffset: CGSize {
+        get {
+            return layer.shadowOffset
+        }
+        set {
+            layer.shadowOffset = newValue
+        }
+    }
+    
+    @IBInspectable
+    var shadowColor: UIColor? {
+        get {
+            if let color = layer.shadowColor {
+                return UIColor(cgColor: color)
+            }
+            return nil
+        }
+        set {
+            if let color = newValue {
+                layer.shadowColor = color.cgColor
+            } else {
+                layer.shadowColor = nil
+            }
+        }
+    }
+}
