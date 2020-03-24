@@ -74,6 +74,40 @@
 			<key>uniqueIdentifier</key>
 			<string>07C87DCF-F060-48AB-9DD3-A21B5E5717D1</string>
 		</dict>
+		<key>0A75B1FF-CE92-4FCC-8832-C285254AB524</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>0A75B1FF-CE92-4FCC-8832-C285254AB524.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606780060.89972496</real>
+			<key>timeStoppedRecording</key>
+			<real>606780065.133255</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>0A75B1FF-CE92-4FCC-8832-C285254AB524</string>
+		</dict>
 		<key>0F2D1563-183F-4773-A126-AD5EF775CC45</key>
 		<dict>
 			<key>className</key>
@@ -176,6 +210,74 @@
 			<key>uniqueIdentifier</key>
 			<string>20C5EAAD-5C73-4CEB-81D3-AF9C63F8E29D</string>
 		</dict>
+		<key>24EB17B4-6FD8-466F-A650-6C3CB8C15D99</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>24EB17B4-6FD8-466F-A650-6C3CB8C15D99.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606779831.94741905</real>
+			<key>timeStoppedRecording</key>
+			<real>606779845.863693</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>24EB17B4-6FD8-466F-A650-6C3CB8C15D99</string>
+		</dict>
+		<key>268468C4-04A6-4921-8384-22C39BAE55C3</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>268468C4-04A6-4921-8384-22C39BAE55C3.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606781408.24254501</real>
+			<key>timeStoppedRecording</key>
+			<real>606781418.068856</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>268468C4-04A6-4921-8384-22C39BAE55C3</string>
+		</dict>
 		<key>26A5124D-1ACE-47E0-9488-A177E8BC91E6</key>
 		<dict>
 			<key>className</key>
@@ -244,6 +346,74 @@
 			<key>uniqueIdentifier</key>
 			<string>27021F44-9FDA-4469-A0F2-7954AC24B0BC</string>
 		</dict>
+		<key>3ADF6A18-3B91-42DC-B001-EE583357C17E</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>3ADF6A18-3B91-42DC-B001-EE583357C17E.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606782425.53678203</real>
+			<key>timeStoppedRecording</key>
+			<real>606782432.40278697</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>3ADF6A18-3B91-42DC-B001-EE583357C17E</string>
+		</dict>
+		<key>44CB4030-5E4C-4FC6-95E1-7E9E457951B3</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>44CB4030-5E4C-4FC6-95E1-7E9E457951B3.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606779849.10256004</real>
+			<key>timeStoppedRecording</key>
+			<real>606779852.60919595</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>44CB4030-5E4C-4FC6-95E1-7E9E457951B3</string>
+		</dict>
 		<key>770280F5-74AD-4A79-9A13-0497B686A278</key>
 		<dict>
 			<key>className</key>
@@ -278,6 +448,40 @@
 			<key>uniqueIdentifier</key>
 			<string>770280F5-74AD-4A79-9A13-0497B686A278</string>
 		</dict>
+		<key>7CC10FF8-05DA-4789-A684-645CA224AB2B</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>7CC10FF8-05DA-4789-A684-645CA224AB2B.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606780395.86048496</real>
+			<key>timeStoppedRecording</key>
+			<real>606780400.18932903</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>7CC10FF8-05DA-4789-A684-645CA224AB2B</string>
+		</dict>
 		<key>8797E6F5-EB45-42EC-AA6A-92159DE01A6D</key>
 		<dict>
 			<key>className</key>
@@ -311,6 +515,40 @@
 			<string>Build PathFinder</string>
 			<key>uniqueIdentifier</key>
 			<string>8797E6F5-EB45-42EC-AA6A-92159DE01A6D</string>
+		</dict>
+		<key>A02160D4-01BC-4009-9541-1BDF811A2E7D</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>A02160D4-01BC-4009-9541-1BDF811A2E7D.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606780904.36231899</real>
+			<key>timeStoppedRecording</key>
+			<real>606780904.76117694</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>A02160D4-01BC-4009-9541-1BDF811A2E7D</string>
 		</dict>
 		<key>A6BC769B-E236-41AA-B4D1-ADA50755353F</key>
 		<dict>
@@ -380,6 +618,40 @@
 			<key>uniqueIdentifier</key>
 			<string>A6C48508-A31F-41CC-92E7-43DD5354DB7B</string>
 		</dict>
+		<key>AE02E930-0005-49A2-8DB0-E318F9F3F5D4</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>AE02E930-0005-49A2-8DB0-E318F9F3F5D4.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606780154.48544896</real>
+			<key>timeStoppedRecording</key>
+			<real>606780156.72604406</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>AE02E930-0005-49A2-8DB0-E318F9F3F5D4</string>
+		</dict>
 		<key>C07AA6CE-70DF-4937-ADA7-581C53A476E3</key>
 		<dict>
 			<key>className</key>
@@ -447,6 +719,142 @@
 			<string>Build PathFinder</string>
 			<key>uniqueIdentifier</key>
 			<string>C3D89274-C58B-4C57-9454-BDDDE0FBE279</string>
+		</dict>
+		<key>C5594570-F346-489A-8A63-796B3C7AF3A4</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C5594570-F346-489A-8A63-796B3C7AF3A4.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606782290.78271496</real>
+			<key>timeStoppedRecording</key>
+			<real>606782306.42894995</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>C5594570-F346-489A-8A63-796B3C7AF3A4</string>
+		</dict>
+		<key>C6923201-1179-46DB-B2D0-D8385C552466</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>C6923201-1179-46DB-B2D0-D8385C552466.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606780024.68717802</real>
+			<key>timeStoppedRecording</key>
+			<real>606780029.334975</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>C6923201-1179-46DB-B2D0-D8385C552466</string>
+		</dict>
+		<key>D8FBE482-F443-4348-AE4C-3A5CFCBF0FB8</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D8FBE482-F443-4348-AE4C-3A5CFCBF0FB8.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606780974.23905301</real>
+			<key>timeStoppedRecording</key>
+			<real>606780974.32419395</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>D8FBE482-F443-4348-AE4C-3A5CFCBF0FB8</string>
+		</dict>
+		<key>E0E8A2CA-8FD5-4420-8AFE-6B15C0224286</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E0E8A2CA-8FD5-4420-8AFE-6B15C0224286.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606781508.23329902</real>
+			<key>timeStoppedRecording</key>
+			<real>606781509.59103405</real>
+			<key>title</key>
+			<string>Build PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>E0E8A2CA-8FD5-4420-8AFE-6B15C0224286</string>
 		</dict>
 		<key>F966AC4A-53DD-40F3-946D-F865482FC454</key>
 		<dict>

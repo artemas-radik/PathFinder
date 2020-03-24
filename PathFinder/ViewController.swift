@@ -13,35 +13,78 @@ class ViewController: UIViewController {
     //MARK: Globals
     let GRID_SIZE = 10
     let GAP_SIZE = 2
-    let CORNER_RADIUS = 2
+    let CORNER_RADIUS = 4
     var nodes: [UIView]! = []
     var horizontalStacks: [UIStackView] = []
-    
     
     //MARK: View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         view.isUserInteractionEnabled = true
-        initializeStacks()
-        initializeNodes()
-        
+        initializeGrid()
     }
     
     //MARK: Drag Detection
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(false)
         super.touchesMoved(touches, with: event)
         guard let touch = event?.allTouches?.first else {return}
-        nodes.forEach { (button) in
-            if button.frame.contains(touch.location(in: button.superview)) {
-                button.backgroundColor = UIColor.systemGreen
-                print(true)
+        nodes.forEach { (node) in
+            if node.frame.contains(touch.location(in: node.superview)) {
+                node.backgroundColor = UIColor.systemGreen
             }
         }
     }
     
-    //MARK: Initialize Stacks
-    func initializeStacks() {
+    //MARK: Initialize Controls
+    func initializeControls() {
+        
+        //Big Stack
+        let bigStack = UIStackView()
+        bigStack.axis = .vertical
+        bigStack.alignment = .fill
+        bigStack.distribution = .fillEqually
+        bigStack.spacing = 20
+        bigStack.isUserInteractionEnabled = true
+        
+        //Draw Stack
+        let drawStack = UIStackView()
+        drawStack.axis = .vertical
+        drawStack.alignment = .fill
+        drawStack.distribution = .fillEqually
+        drawStack.spacing = 5
+        drawStack.isUserInteractionEnabled = true
+        
+        let drawToolLabel = UILabel()
+        drawToolLabel.text = "CHOOSE DRAW TOOL"
+        drawStack.addArrangedSubview(drawToolLabel)
+        
+        let drawWallButton = UIButton()
+        drawWallButton.titleLabel?.text
+        
+        //Algorithm Stack
+        let algorithmStack = UIStackView()
+        algorithmStack.axis = .vertical
+        algorithmStack.alignment = .fill
+        algorithmStack.distribution = .fillEqually
+        algorithmStack.spacing = 5
+        algorithmStack.isUserInteractionEnabled = true
+        
+        //Speed Stack
+        
+        //Go/Stop Button
+        
+        
+    }
+    
+    
+    //MARK: Initialize Grid
+    func initializeGrid() {
+        initializeGridStacks()
+        initializeGridNodes()
+    }
+    
+    //MARK: Initialize Grid Stacks
+    func initializeGridStacks() {
         let verticalStack = UIStackView()
         verticalStack.axis = .vertical
         verticalStack.alignment = .fill
@@ -74,12 +117,12 @@ class ViewController: UIViewController {
         
     }
     
-    //MARK: Initialize Nodes
-    func initializeNodes() {
+    //MARK: Initialize Grid Nodes
+    func initializeGridNodes() {
         for horizontalStack in horizontalStacks {
             for _ in 1...GRID_SIZE {
                 let node = UIView()
-                node.backgroundColor = UIColor.systemGray
+                node.backgroundColor = UIColor.systemFill
                 node.cornerRadius = CGFloat(CORNER_RADIUS)
                 node.isUserInteractionEnabled = true
                 horizontalStack.addArrangedSubview(node)
@@ -90,6 +133,8 @@ class ViewController: UIViewController {
     }
     
 }
+
+
 
 //MARK: UIView Extension
 extension UIView {
