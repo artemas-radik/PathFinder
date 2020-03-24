@@ -14,18 +14,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
         initializeStacks()
         initializeButtons()
         
     }
     
-    var buttons: [UIButton]! = []
+    var buttons: [UIView]! = []
     var horizontalStacks: [UIStackView] = []
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         print(false)
-        super.touchesMoved(touches, with: event)
+//        super.touchesMoved(touches, with: event)
         guard let touch = event?.allTouches?.first else {return}
         buttons.forEach { (button) in
             if button.frame.contains(touch.location(in: button.superview)) {
@@ -36,12 +37,12 @@ class ViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(false)
-        super.touchesBegan(touches, with: event)
+        print("began")
+//        super.touchesBegan(touches, with: event)
         guard let touch = event?.allTouches?.first else {return}
         buttons.forEach { (button) in
             if button.frame.contains(touch.location(in: button.superview)) {
-                button.backgroundColor = UIColor.systemGreen
+                button.backgroundColor = UIColor.systemRed
                 print(true)
             }
         }
@@ -53,6 +54,7 @@ class ViewController: UIViewController {
         verticalStack.alignment = .fill
         verticalStack.distribution = .fillEqually
         verticalStack.spacing = 3
+        verticalStack.isUserInteractionEnabled = true
         
         let verticalStackConstraints: [NSLayoutConstraint] = [
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor, constant: 20),
@@ -69,6 +71,7 @@ class ViewController: UIViewController {
         
         for _ in 1...GRID_SIZE {
             let horizontalStackView = UIStackView()
+            horizontalStackView.isUserInteractionEnabled = true
             horizontalStackView.axis = .horizontal
             horizontalStackView.alignment = .fill
             horizontalStackView.distribution = .fillEqually
@@ -82,10 +85,10 @@ class ViewController: UIViewController {
     func initializeButtons() {
         for horizontalStack in horizontalStacks {
             for _ in 1...GRID_SIZE {
-                let button = UIButton()
+                let button = UIView()
                 button.backgroundColor = UIColor.systemGray
                 button.cornerRadius = 3
-                
+                button.isUserInteractionEnabled = true
                 horizontalStack.addArrangedSubview(button)
                 buttons.append(button)
                 
