@@ -10,25 +10,29 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let GRID_SIZE = 20
+    //MARK: Globals
+    let GRID_SIZE = 10
+    let GAP_SIZE = 2
+    let CORNER_RADIUS = 2
+    var nodes: [UIView]! = []
+    var horizontalStacks: [UIStackView] = []
     
+    
+    //MARK: View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         view.isUserInteractionEnabled = true
-        // Do any additional setup after loading the view.
         initializeStacks()
-        initializeButtons()
+        initializeNodes()
         
     }
     
-    var buttons: [UIView]! = []
-    var horizontalStacks: [UIStackView] = []
-    
+    //MARK: Drag Detection
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         print(false)
-//        super.touchesMoved(touches, with: event)
+        super.touchesMoved(touches, with: event)
         guard let touch = event?.allTouches?.first else {return}
-        buttons.forEach { (button) in
+        nodes.forEach { (button) in
             if button.frame.contains(touch.location(in: button.superview)) {
                 button.backgroundColor = UIColor.systemGreen
                 print(true)
@@ -36,31 +40,19 @@ class ViewController: UIViewController {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("began")
-//        super.touchesBegan(touches, with: event)
-        guard let touch = event?.allTouches?.first else {return}
-        buttons.forEach { (button) in
-            if button.frame.contains(touch.location(in: button.superview)) {
-                button.backgroundColor = UIColor.systemRed
-                print(true)
-            }
-        }
-    }
-    
+    //MARK: Initialize Stacks
     func initializeStacks() {
         let verticalStack = UIStackView()
         verticalStack.axis = .vertical
         verticalStack.alignment = .fill
         verticalStack.distribution = .fillEqually
-        verticalStack.spacing = 3
+        verticalStack.spacing = CGFloat(GAP_SIZE)
         verticalStack.isUserInteractionEnabled = true
         
         let verticalStackConstraints: [NSLayoutConstraint] = [
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor, constant: 20),
             view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor, constant: -20),
-            verticalStack.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5),
-//            verticalStack.centerYAnchor.constraint(equalToSystemSpacingBelow: self.view.centerYAnchor, multiplier: 0.8),
+            verticalStack.heightAnchor.constraint(equalTo: verticalStack.widthAnchor),
             NSLayoutConstraint(item: verticalStack, attribute: .centerY, relatedBy: .equal, toItem: self.view, attribute: .centerY, multiplier: 0.8, constant: 0)
         ]
         
@@ -75,22 +67,23 @@ class ViewController: UIViewController {
             horizontalStackView.axis = .horizontal
             horizontalStackView.alignment = .fill
             horizontalStackView.distribution = .fillEqually
-            horizontalStackView.spacing = 3
+            horizontalStackView.spacing = CGFloat(GAP_SIZE)
             horizontalStacks.append(horizontalStackView)
             verticalStack.addArrangedSubview(horizontalStackView)
         }
         
     }
     
-    func initializeButtons() {
+    //MARK: Initialize Nodes
+    func initializeNodes() {
         for horizontalStack in horizontalStacks {
             for _ in 1...GRID_SIZE {
-                let button = UIView()
-                button.backgroundColor = UIColor.systemGray
-                button.cornerRadius = 3
-                button.isUserInteractionEnabled = true
-                horizontalStack.addArrangedSubview(button)
-                buttons.append(button)
+                let node = UIView()
+                node.backgroundColor = UIColor.systemGray
+                node.cornerRadius = CGFloat(CORNER_RADIUS)
+                node.isUserInteractionEnabled = true
+                horizontalStack.addArrangedSubview(node)
+                nodes.append(node)
                 
             }
         }
@@ -98,19 +91,7 @@ class ViewController: UIViewController {
     
 }
 
-@IBDesignable
-class DesignableView: UIView {
-}
-
-@IBDesignable
-class DesignableButton: UIButton {
-    
-}
-
-@IBDesignable
-class DesignableLabel: UILabel {
-}
-
+//MARK: UIView Extension
 extension UIView {
     
     @IBInspectable
