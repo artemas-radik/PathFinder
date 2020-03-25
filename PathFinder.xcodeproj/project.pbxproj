@@ -15,6 +15,7 @@
 		C7D425C6242930C3001CE9E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7D425C4242930C3001CE9E7 /* LaunchScreen.storyboard */; };
 		C7D425D1242930C4001CE9E7 /* PathFinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D425D0242930C4001CE9E7 /* PathFinderTests.swift */; };
 		C7D425DC242930C5001CE9E7 /* PathFinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D425DB242930C5001CE9E7 /* PathFinderUITests.swift */; };
+		C7D425EA242AD4B3001CE9E7 /* LexendDeca-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7D425E9242AD4B2001CE9E7 /* LexendDeca-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C7D425D7242930C4001CE9E7 /* PathFinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PathFinderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D425DB242930C5001CE9E7 /* PathFinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathFinderUITests.swift; sourceTree = "<group>"; };
 		C7D425DD242930C5001CE9E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7D425E9242AD4B2001CE9E7 /* LexendDeca-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				C7D425B9242930B5001CE9E7 /* AppDelegate.swift */,
 				C7D425BB242930B5001CE9E7 /* SceneDelegate.swift */,
 				C7D425BD242930B5001CE9E7 /* ViewController.swift */,
+				C7D425E9242AD4B2001CE9E7 /* LexendDeca-Regular.ttf */,
 				C7D425BF242930B5001CE9E7 /* Main.storyboard */,
 				C7D425C2242930C3001CE9E7 /* Assets.xcassets */,
 				C7D425C4242930C3001CE9E7 /* LaunchScreen.storyboard */,
@@ -234,6 +237,7 @@
 			files = (
 				C7D425C6242930C3001CE9E7 /* LaunchScreen.storyboard in Resources */,
 				C7D425C3242930C3001CE9E7 /* Assets.xcassets in Resources */,
+				C7D425EA242AD4B3001CE9E7 /* LexendDeca-Regular.ttf in Resources */,
 				C7D425C1242930B5001CE9E7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
