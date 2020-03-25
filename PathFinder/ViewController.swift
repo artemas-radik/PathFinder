@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         drawButtonStack.addArrangedSubview(initializeControlButton(title: "Wall", color: UIColor.systemPink))
         drawButtonStack.addArrangedSubview(initializeControlButton(title: "Space", color: UIColor.systemFill))
         drawButtonStack.addArrangedSubview(initializeControlButton(title: "Start", color: UIColor.systemIndigo))
-        drawButtonStack.addArrangedSubview(initializeControlButton(title: "End", color: UIColor.systemTeal))
+        drawButtonStack.addArrangedSubview(initializeControlButton(title: "End", color: UIColor.systemBlue))
             
         //Algorithm Stack
         let algorithmStack = initializeControlStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         controlStack.addArrangedSubview(controlButtonStack)
         
         controlButtonStack.addArrangedSubview(initializeControlButton(title: "Start", color: UIColor.systemGreen))
-        controlButtonStack.addArrangedSubview(initializeControlButton(title: "Reset", color: UIColor.systemRed))
+        controlButtonStack.addArrangedSubview(initializeControlButton(title: "Reset", color: UIColor.systemPink))
         
     }
     
