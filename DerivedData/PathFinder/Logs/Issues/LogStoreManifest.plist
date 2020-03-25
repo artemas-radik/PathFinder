@@ -6,7 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>3DE879E2-132A-4C7E-BC1B-C49E3ECAFA7E</key>
+		<key>95D3D582-2573-440C-A75E-8C5705D49310</key>
 		<dict>
 			<key>className</key>
 			<string>IDEActivityLogMajorGroupSection</string>
@@ -15,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.target.product-type.application</string>
 			<key>fileName</key>
-			<string>3DE879E2-132A-4C7E-BC1B-C49E3ECAFA7E.xcactivitylog</string>
+			<string>95D3D582-2573-440C-A75E-8C5705D49310.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
@@ -26,13 +26,13 @@
 			<key>signature</key>
 			<string>PathFinder-bujmncpujyqecubaxeznprqarqfm</string>
 			<key>timeStartedRecording</key>
-			<real>606793413.93819296</real>
+			<real>606794219.55806899</real>
 			<key>timeStoppedRecording</key>
-			<real>606793415.835832</real>
+			<real>606794223.42237997</real>
 			<key>title</key>
 			<string>Build target PathFinder</string>
 			<key>uniqueIdentifier</key>
-			<string>3DE879E2-132A-4C7E-BC1B-C49E3ECAFA7E</string>
+			<string>95D3D582-2573-440C-A75E-8C5705D49310</string>
 		</dict>
 	</dict>
 	<key>preserveOldLogs</key>

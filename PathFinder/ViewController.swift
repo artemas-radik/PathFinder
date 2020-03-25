@@ -14,8 +14,8 @@ class ViewController: UIViewController {
     let GRID_SIZE = 10
     let GRID_GAP_SIZE = 2
     let GRID_NODE_CORNER_RADIUS = 4
-    let TEXT_SIZE = (1.3/71) * UIScreen.main.bounds.height
-    let BUTTON_CORNER_RADIUS = 15
+    let TEXT_SIZE = (1.2/71) * UIScreen.main.bounds.height
+    let BUTTON_CORNER_RADIUS = 10
     let BIG_STACK_SPACING = 10
     let SMALL_STACK_SPACING = 2
     let OPTION_STACK_SPACING = 10
@@ -32,9 +32,19 @@ class ViewController: UIViewController {
         initializeControls()
     }
     
-    //MARK: Drag Detection
+    //MARK: Drag and Touch Detection
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
+        guard let touch = event?.allTouches?.first else {return}
+        nodes.forEach { (node) in
+            if node.frame.contains(touch.location(in: node.superview)) {
+                node.backgroundColor = UIColor.systemGreen
+            }
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         guard let touch = event?.allTouches?.first else {return}
         nodes.forEach { (node) in
             if node.frame.contains(touch.location(in: node.superview)) {

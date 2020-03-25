@@ -210,6 +210,40 @@
 			<key>uniqueIdentifier</key>
 			<string>1453D626-E99C-4919-98A1-CB1FB28FC387</string>
 		</dict>
+		<key>1A306B6D-5B68-46EE-BE9C-CD5897BCCE08</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>1A306B6D-5B68-46EE-BE9C-CD5897BCCE08.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606794102.48481297</real>
+			<key>timeStoppedRecording</key>
+			<real>606794219.25112498</real>
+			<key>title</key>
+			<string>Debug PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>1A306B6D-5B68-46EE-BE9C-CD5897BCCE08</string>
+		</dict>
 		<key>1A8D312E-8D3C-4A0B-A007-E0587B1AF4CB</key>
 		<dict>
 			<key>className</key>
@@ -754,6 +788,40 @@
 			<key>uniqueIdentifier</key>
 			<string>5EC90731-0CA8-4F24-BEEC-4E59A427B948</string>
 		</dict>
+		<key>5ECF17D5-A77C-4FB1-B9C8-2F587B6ADFF3</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>5ECF17D5-A77C-4FB1-B9C8-2F587B6ADFF3.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606793787.22860503</real>
+			<key>timeStoppedRecording</key>
+			<real>606793798.42879403</real>
+			<key>title</key>
+			<string>Debug PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>5ECF17D5-A77C-4FB1-B9C8-2F587B6ADFF3</string>
+		</dict>
 		<key>5F369F10-D5BF-4887-B89D-DADFB5A60B06</key>
 		<dict>
 			<key>className</key>
@@ -1264,6 +1332,74 @@
 			<key>uniqueIdentifier</key>
 			<string>7A8E4B3B-1F7B-4F13-824E-7C89F04079EA</string>
 		</dict>
+		<key>8067777E-B88B-41BF-8CB2-D2F27B2498FD</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>8067777E-B88B-41BF-8CB2-D2F27B2498FD.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606793819.22572303</real>
+			<key>timeStoppedRecording</key>
+			<real>606793845.52572298</real>
+			<key>title</key>
+			<string>Debug PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>8067777E-B88B-41BF-8CB2-D2F27B2498FD</string>
+		</dict>
+		<key>81F61416-A74E-470F-BF2C-68321AE80869</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>81F61416-A74E-470F-BF2C-68321AE80869.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606793890.731498</real>
+			<key>timeStoppedRecording</key>
+			<real>606794091.773386</real>
+			<key>title</key>
+			<string>Debug PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>81F61416-A74E-470F-BF2C-68321AE80869</string>
+		</dict>
 		<key>85E14FD7-7C9D-46B9-8A27-51A1480941B9</key>
 		<dict>
 			<key>className</key>
@@ -1331,6 +1467,40 @@
 			<string>Debug PathFinder</string>
 			<key>uniqueIdentifier</key>
 			<string>88340780-EE54-43F7-B69A-5EEE9B8BD262</string>
+		</dict>
+		<key>891E2185-18D3-427E-86B9-4E0434F54C00</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>891E2185-18D3-427E-86B9-4E0434F54C00.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606793912.22711205</real>
+			<key>timeStoppedRecording</key>
+			<real>606794062.90675497</real>
+			<key>title</key>
+			<string>Debug PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>891E2185-18D3-427E-86B9-4E0434F54C00</string>
 		</dict>
 		<key>89E820EE-4C9A-4960-B674-69D58A7E228B</key>
 		<dict>
@@ -1502,6 +1672,108 @@
 			<key>uniqueIdentifier</key>
 			<string>97A52334-8256-432E-9537-6A2C5E72E640</string>
 		</dict>
+		<key>9C1DEBFD-F130-4CBA-8309-A4F94F4C53C2</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>9C1DEBFD-F130-4CBA-8309-A4F94F4C53C2.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606793718.37947202</real>
+			<key>timeStoppedRecording</key>
+			<real>606793783.64827502</real>
+			<key>title</key>
+			<string>Debug PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>9C1DEBFD-F130-4CBA-8309-A4F94F4C53C2</string>
+		</dict>
+		<key>9CE20FBC-A47B-4F43-8EEA-BD9E81A62EE1</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>9CE20FBC-A47B-4F43-8EEA-BD9E81A62EE1.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606793847.97666705</real>
+			<key>timeStoppedRecording</key>
+			<real>606793889.21542597</real>
+			<key>title</key>
+			<string>Debug PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>9CE20FBC-A47B-4F43-8EEA-BD9E81A62EE1</string>
+		</dict>
+		<key>9D6444B1-6E46-45C0-ADDE-B7F240F1D58E</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>9D6444B1-6E46-45C0-ADDE-B7F240F1D58E.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606793415.86519301</real>
+			<key>timeStoppedRecording</key>
+			<real>606793712.86263597</real>
+			<key>title</key>
+			<string>Debug PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>9D6444B1-6E46-45C0-ADDE-B7F240F1D58E</string>
+		</dict>
 		<key>A25059FE-00A4-4AEA-B903-9C726E6BF846</key>
 		<dict>
 			<key>className</key>
@@ -1603,6 +1875,40 @@
 			<string>Debug PathFinder</string>
 			<key>uniqueIdentifier</key>
 			<string>A5F8E828-7769-439C-A865-A36AB7887C92</string>
+		</dict>
+		<key>B1AFAB78-BBEA-449A-94BE-29F85FF08034</key>
+		<dict>
+			<key>className</key>
+			<string>DBGConsoleLog</string>
+			<key>documentTypeString</key>
+			<string>com.apple.dt.IDE.DebuggerLogContentType</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.DebugLog</string>
+			<key>fileName</key>
+			<string>B1AFAB78-BBEA-449A-94BE-29F85FF08034.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>PathFinder project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>PathFinder</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Debug PathFinder</string>
+			<key>timeStartedRecording</key>
+			<real>606793799.32013297</real>
+			<key>timeStoppedRecording</key>
+			<real>606793818.34405398</real>
+			<key>title</key>
+			<string>Debug PathFinder</string>
+			<key>uniqueIdentifier</key>
+			<string>B1AFAB78-BBEA-449A-94BE-29F85FF08034</string>
 		</dict>
 		<key>B7FEE2A4-E452-44FE-9B77-FA81EE0ECB6C</key>
 		<dict>
