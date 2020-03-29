@@ -21,6 +21,9 @@ class ViewController: UIViewController {
     let OPTION_STACK_SPACING = 10
     let STANDARD_CONSTRAINT_CONSTANT: CGFloat = 20
     let FONT_NAME = "LexendDeca-Regular"
+    let CONTROL_BUTTON_ALPHA_MAX: CGFloat = 1.0
+    let CONTROL_BUTTON_ALPHA_MIN: CGFloat = 0.4
+    let CONTROL_BUTTON_ANIMATION_DURATION = 0.2
     
     var nodes: [UIView]! = []
     var verticalGridStack: UIStackView? = nil
@@ -62,6 +65,16 @@ class ViewController: UIViewController {
         toReturn.setTitleColor(UIColor.label, for: .normal)
         toReturn.backgroundColor = color
         toReturn.cornerRadius = CGFloat(CONTROL_BUTTON_CORNER_RADIUS)
+        toReturn.addTarget(self, action: #selector(controlButtonTouchUpInside(sender:)), for: .touchUpInside)
+        toReturn.addTarget(self, action: #selector(controlButtonTouchDown(sender:)), for: .touchDown)
+        toReturn.addTarget(self, action: #selector(controlButtonTouchDragExit(sender:)), for: .touchDragExit)
+        toReturn.alpha = CONTROL_BUTTON_ALPHA_MIN
+        return toReturn
+    }
+    
+    func initializeCustomButton(title: String, color: UIColor, alpha: CGFloat) -> UIButton {
+        let toReturn = initializeCustomButton(title: title, color: color)
+        toReturn.alpha = alpha
         return toReturn
     }
     
@@ -149,7 +162,7 @@ class ViewController: UIViewController {
         let drawButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         drawStack.addArrangedSubview(drawButtonStack)
         
-        drawButtonStack.addArrangedSubview(initializeCustomButton(title: "Wall", color: UIColor.systemPink))
+        drawButtonStack.addArrangedSubview(initializeCustomButton(title: "Wall", color: UIColor.systemPink, alpha: CONTROL_BUTTON_ALPHA_MAX))
         drawButtonStack.addArrangedSubview(initializeCustomButton(title: "Space", color: UIColor.systemFill))
         drawButtonStack.addArrangedSubview(initializeCustomButton(title: "Start", color: UIColor.systemIndigo))
         drawButtonStack.addArrangedSubview(initializeCustomButton(title: "End", color: UIColor.systemBlue))
@@ -163,7 +176,7 @@ class ViewController: UIViewController {
         let algorithmButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         algorithmStack.addArrangedSubview(algorithmButtonStack)
         
-        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Depth-First-Search", color: UIColor.systemGreen))
+        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Depth-First-Search", color: UIColor.systemGreen, alpha: CONTROL_BUTTON_ALPHA_MAX))
         algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Breadth-First-Search", color: UIColor.systemGreen))
         
         //Speed Stack
@@ -182,11 +195,55 @@ class ViewController: UIViewController {
         let controlButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         controlStack.addArrangedSubview(controlButtonStack)
         
-        controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Start", color: UIColor.systemGreen))
+        controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Start", color: UIColor.systemGreen, alpha: CONTROL_BUTTON_ALPHA_MAX))
         controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Reset", color: UIColor.systemPink))
         
     }
+    
+    //MARK: Control Button Handlers
+    
+    @objc func controlButtonTouchUpInside(sender: UIButton!) {
+       print("Button touched up inside")
+        
+        for button in (sender.superview as! UIStackView).arrangedSubviews {
+            if button == sender {
+                UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
+                    sender.alpha = self.CONTROL_BUTTON_ALPHA_MAX
+                }
+            }
+            
+            else {
+                UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
+                    button.alpha = self.CONTROL_BUTTON_ALPHA_MIN
+                }
+            }
+        }
+        
+    }
+    
+    var mostRecentAlpha = 1.0
+    
+    @objc func controlButtonTouchDown(sender: UIButton!) {
+       print("Button touched down")
+        
+        self.mostRecentAlpha = Double(sender.alpha)
+        
+        UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
+            sender.alpha = self.CONTROL_BUTTON_ALPHA_MIN
+        }
+    }
+    
+    @objc func controlButtonTouchDragExit(sender: UIButton!) {
+       print("Button touch dragged exited")
+        
+        UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
+            sender.alpha = CGFloat(self.mostRecentAlpha)
+        }
+    }
+    
 }
+
+
     
 //MARK: UIView Extension
 extension UIView {
