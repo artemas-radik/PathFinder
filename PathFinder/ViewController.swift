@@ -54,6 +54,77 @@ class ViewController: UIViewController {
         }
     }
     
+    //MARK: Custom UI Initializers
+    func initializeCustomButton(title: String, color: UIColor) -> UIButton {
+        let toReturn = UIButton()
+        toReturn.setTitle(title, for: .normal)
+        toReturn.titleLabel!.font = UIFont(name: FONT_NAME, size: TEXT_SIZE)
+        toReturn.setTitleColor(UIColor.label, for: .normal)
+        toReturn.backgroundColor = color
+        toReturn.cornerRadius = CGFloat(CONTROL_BUTTON_CORNER_RADIUS)
+        return toReturn
+    }
+    
+    func initializeCustomLabel(title: String) -> UILabel {
+        let toReturn = UILabel()
+        toReturn.text = title
+        toReturn.font = UIFont.init(name: FONT_NAME, size: TEXT_SIZE)
+        return toReturn
+    }
+    
+    func initializeCustomStack(axis: NSLayoutConstraint.Axis, spacing: Int) -> UIStackView {
+        let toReturn = UIStackView()
+        toReturn.axis = axis
+        toReturn.alignment = .fill
+        toReturn.distribution = .fillEqually
+        toReturn.spacing = CGFloat(spacing)
+        toReturn.isUserInteractionEnabled = true
+        return toReturn
+    }
+    
+    //MARK: Initialize Grid
+    func initializeGrid() {
+        initializeGridStacks()
+        initializeGridNodes()
+    }
+        
+    //MARK: Initialize Grid Stacks
+    func initializeGridStacks() {
+        verticalGridStack = initializeCustomStack(axis: .vertical, spacing: GRID_GAP_SIZE)
+        
+        let gridStackConstraints: [NSLayoutConstraint] = [
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: verticalGridStack!.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: verticalGridStack!.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: verticalGridStack!.topAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
+            verticalGridStack!.heightAnchor.constraint(equalTo: verticalGridStack!.widthAnchor)
+        ]
+        
+        verticalGridStack!.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(verticalGridStack!)
+        NSLayoutConstraint.activate(gridStackConstraints)
+        
+        
+        for _ in 1...GRID_SIZE {
+            let horizontalStackView = initializeCustomStack(axis: .horizontal, spacing: GRID_GAP_SIZE)
+            verticalGridStack!.addArrangedSubview(horizontalStackView)
+        }
+        
+    }
+        
+    //MARK: Initialize Grid Nodes
+    func initializeGridNodes() {
+        for horizontalStack in verticalGridStack!.arrangedSubviews {
+            for _ in 1...GRID_SIZE {
+                let node = UIView()
+                node.backgroundColor = UIColor.systemFill
+                node.cornerRadius = CGFloat(GRID_NODE_CORNER_RADIUS)
+                node.isUserInteractionEnabled = true
+                (horizontalStack as! UIStackView).addArrangedSubview(node)
+                nodes.append(node)
+            }
+        }
+    }
+    
     //MARK: Initialize Controls
     func initializeControls() {
         
@@ -115,81 +186,8 @@ class ViewController: UIViewController {
         controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Reset", color: UIColor.systemPink))
         
     }
-    
-    func initializeCustomButton(title: String, color: UIColor) -> UIButton {
-        let toReturn = UIButton()
-        toReturn.setTitle(title, for: .normal)
-        toReturn.titleLabel!.font = UIFont(name: FONT_NAME, size: TEXT_SIZE)
-        toReturn.setTitleColor(UIColor.label, for: .normal)
-        toReturn.backgroundColor = color
-        toReturn.cornerRadius = CGFloat(CONTROL_BUTTON_CORNER_RADIUS)
-        return toReturn
-    }
-    
-    func initializeCustomLabel(title: String) -> UILabel {
-        let toReturn = UILabel()
-        toReturn.text = title
-        toReturn.font = UIFont.init(name: FONT_NAME, size: TEXT_SIZE)
-        return toReturn
-    }
-    
-    func initializeCustomStack(axis: NSLayoutConstraint.Axis, spacing: Int) -> UIStackView {
-        let toReturn = UIStackView()
-        toReturn.axis = axis
-        toReturn.alignment = .fill
-        toReturn.distribution = .fillEqually
-        toReturn.spacing = CGFloat(spacing)
-        toReturn.isUserInteractionEnabled = true
-        return toReturn
-    }
-    
-    //MARK: Initialize Grid
-    func initializeGrid() {
-        initializeGridStacks()
-        initializeGridNodes()
-    }
-    
-    //MARK: Initialize Grid Stacks
-    func initializeGridStacks() {
-        verticalGridStack = initializeCustomStack(axis: .vertical, spacing: GRID_GAP_SIZE)
-        
-        let gridStackConstraints: [NSLayoutConstraint] = [
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: verticalGridStack!.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: verticalGridStack!.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
-            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: verticalGridStack!.topAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
-            verticalGridStack!.heightAnchor.constraint(equalTo: verticalGridStack!.widthAnchor)
-        ]
-        
-        verticalGridStack!.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(verticalGridStack!)
-        NSLayoutConstraint.activate(gridStackConstraints)
-        
-        
-        for _ in 1...GRID_SIZE {
-            let horizontalStackView = initializeCustomStack(axis: .horizontal, spacing: GRID_GAP_SIZE)
-            verticalGridStack!.addArrangedSubview(horizontalStackView)
-        }
-        
-    }
-    
-    //MARK: Initialize Grid Nodes
-    func initializeGridNodes() {
-        for horizontalStack in verticalGridStack!.arrangedSubviews {
-            for _ in 1...GRID_SIZE {
-                let node = UIView()
-                node.backgroundColor = UIColor.systemFill
-                node.cornerRadius = CGFloat(GRID_NODE_CORNER_RADIUS)
-                node.isUserInteractionEnabled = true
-                (horizontalStack as! UIStackView).addArrangedSubview(node)
-                nodes.append(node)
-            }
-        }
-    }
-    
 }
-
-
-
+    
 //MARK: UIView Extension
 extension UIView {
     
