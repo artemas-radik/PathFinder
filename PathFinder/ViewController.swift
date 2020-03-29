@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     let BIG_STACK_SPACING = 10
     let SMALL_STACK_SPACING = 2
     let OPTION_STACK_SPACING = 10
+    let STANDARD_CONSTRAINT_CONSTANT: CGFloat = 20
+    let FONT_NAME = "LexendDeca-Regular"
     
     var nodes: [UIView]! = []
     var verticalGridStack: UIStackView? = nil
@@ -58,10 +60,10 @@ class ViewController: UIViewController {
         //Big Stack
         let bigStack = initializeCustomStack(axis: .vertical, spacing: BIG_STACK_SPACING)
         let bigStackConstraints: [NSLayoutConstraint] = [
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: bigStack.trailingAnchor, constant: 20),
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: bigStack.leadingAnchor, constant: -20),
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bigStack.bottomAnchor, constant: 20),
-            NSLayoutConstraint(item: bigStack, attribute: .top, relatedBy: .equal, toItem: verticalGridStack, attribute: .bottom, multiplier: 1, constant: 20)
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: bigStack.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: bigStack.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bigStack.bottomAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
+            NSLayoutConstraint(item: bigStack, attribute: .top, relatedBy: .equal, toItem: verticalGridStack, attribute: .bottom, multiplier: 1, constant: STANDARD_CONSTRAINT_CONSTANT)
         ]
         bigStack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bigStack)
@@ -117,7 +119,7 @@ class ViewController: UIViewController {
     func initializeCustomButton(title: String, color: UIColor) -> UIButton {
         let toReturn = UIButton()
         toReturn.setTitle(title, for: .normal)
-        toReturn.titleLabel!.font = UIFont(name: "LexendDeca-Regular", size: TEXT_SIZE)
+        toReturn.titleLabel!.font = UIFont(name: FONT_NAME, size: TEXT_SIZE)
         toReturn.setTitleColor(UIColor.label, for: .normal)
         toReturn.backgroundColor = color
         toReturn.cornerRadius = CGFloat(CONTROL_BUTTON_CORNER_RADIUS)
@@ -127,7 +129,7 @@ class ViewController: UIViewController {
     func initializeCustomLabel(title: String) -> UILabel {
         let toReturn = UILabel()
         toReturn.text = title
-        toReturn.font = UIFont.init(name: "LexendDeca-Regular", size: TEXT_SIZE)
+        toReturn.font = UIFont.init(name: FONT_NAME, size: TEXT_SIZE)
         return toReturn
     }
     
@@ -152,9 +154,9 @@ class ViewController: UIViewController {
         verticalGridStack = initializeCustomStack(axis: .vertical, spacing: GRID_GAP_SIZE)
         
         let gridStackConstraints: [NSLayoutConstraint] = [
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: verticalGridStack!.trailingAnchor, constant: 20),
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: verticalGridStack!.leadingAnchor, constant: -20),
-            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: verticalGridStack!.topAnchor, constant: -20),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: verticalGridStack!.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: verticalGridStack!.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: verticalGridStack!.topAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
             verticalGridStack!.heightAnchor.constraint(equalTo: verticalGridStack!.widthAnchor)
         ]
         
