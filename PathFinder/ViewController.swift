@@ -15,14 +15,13 @@ class ViewController: UIViewController {
     let GRID_GAP_SIZE = 2
     let GRID_NODE_CORNER_RADIUS = 4
     let TEXT_SIZE = (1.2/71) * UIScreen.main.bounds.height
-    let BUTTON_CORNER_RADIUS = 10
+    let CONTROL_BUTTON_CORNER_RADIUS = 10
     let BIG_STACK_SPACING = 10
     let SMALL_STACK_SPACING = 2
     let OPTION_STACK_SPACING = 10
     
     var nodes: [UIView]! = []
-    var horizontalStacks: [UIStackView] = []
-    var gridStack: UIStackView? = nil
+    var verticalGridStack: UIStackView? = nil
     
     //MARK: View Did Load
     override func viewDidLoad() {
@@ -57,82 +56,82 @@ class ViewController: UIViewController {
     func initializeControls() {
         
         //Big Stack
-        let bigStack = initializeControlStack(axis: .vertical, spacing: BIG_STACK_SPACING)
+        let bigStack = initializeCustomStack(axis: .vertical, spacing: BIG_STACK_SPACING)
         let bigStackConstraints: [NSLayoutConstraint] = [
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: bigStack.trailingAnchor, constant: 20),
             view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: bigStack.leadingAnchor, constant: -20),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bigStack.bottomAnchor, constant: 20),
-            NSLayoutConstraint(item: bigStack, attribute: .top, relatedBy: .equal, toItem: gridStack, attribute: .bottom, multiplier: 1, constant: 20)
+            NSLayoutConstraint(item: bigStack, attribute: .top, relatedBy: .equal, toItem: verticalGridStack, attribute: .bottom, multiplier: 1, constant: 20)
         ]
         bigStack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bigStack)
         NSLayoutConstraint.activate(bigStackConstraints)
         
         //Draw Tool Stack
-        let drawStack = initializeControlStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
+        let drawStack = initializeCustomStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
         bigStack.addArrangedSubview(drawStack)
         
-        drawStack.addArrangedSubview(initializeControlLabel(title: "CHOOSE DRAW TOOL"))
-            
-        let drawButtonStack = initializeControlStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
+        drawStack.addArrangedSubview(initializeCustomLabel(title: "CHOOSE DRAW TOOL"))
+        
+        let drawButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         drawStack.addArrangedSubview(drawButtonStack)
         
-        drawButtonStack.addArrangedSubview(initializeControlButton(title: "Wall", color: UIColor.systemPink))
-        drawButtonStack.addArrangedSubview(initializeControlButton(title: "Space", color: UIColor.systemFill))
-        drawButtonStack.addArrangedSubview(initializeControlButton(title: "Start", color: UIColor.systemIndigo))
-        drawButtonStack.addArrangedSubview(initializeControlButton(title: "End", color: UIColor.systemBlue))
+        drawButtonStack.addArrangedSubview(initializeCustomButton(title: "Wall", color: UIColor.systemPink))
+        drawButtonStack.addArrangedSubview(initializeCustomButton(title: "Space", color: UIColor.systemFill))
+        drawButtonStack.addArrangedSubview(initializeCustomButton(title: "Start", color: UIColor.systemIndigo))
+        drawButtonStack.addArrangedSubview(initializeCustomButton(title: "End", color: UIColor.systemBlue))
             
         //Algorithm Stack
-        let algorithmStack = initializeControlStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
+        let algorithmStack = initializeCustomStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
         bigStack.addArrangedSubview(algorithmStack)
         
-        algorithmStack.addArrangedSubview(initializeControlLabel(title: "CHOOSE SOLVE ALGORITHM"))
+        algorithmStack.addArrangedSubview(initializeCustomLabel(title: "CHOOSE SOLVE ALGORITHM"))
         
-        let algorithmButtonStack = initializeControlStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
+        let algorithmButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         algorithmStack.addArrangedSubview(algorithmButtonStack)
         
-        algorithmButtonStack.addArrangedSubview(initializeControlButton(title: "Depth-First-Search", color: UIColor.systemGreen))
-        algorithmButtonStack.addArrangedSubview(initializeControlButton(title: "Breadth-First-Search", color: UIColor.systemGreen))
+        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Depth-First-Search", color: UIColor.systemGreen))
+        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Breadth-First-Search", color: UIColor.systemGreen))
         
         //Speed Stack
-        let speedStack = initializeControlStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
+        let speedStack = initializeCustomStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
         bigStack.addArrangedSubview(speedStack)
         
-        speedStack.addArrangedSubview(initializeControlLabel(title: "SET SOLVE SPEED"))
+        speedStack.addArrangedSubview(initializeCustomLabel(title: "SET SOLVE SPEED"))
         speedStack.addArrangedSubview(UISlider())
         
         //Controls, Controls.
-        let controlStack = initializeControlStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
+        let controlStack = initializeCustomStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
         bigStack.addArrangedSubview(controlStack)
         
-        controlStack.addArrangedSubview(initializeControlLabel(title: "START, STOP, AND RESET"))
+        controlStack.addArrangedSubview(initializeCustomLabel(title: "START, STOP, AND RESET"))
         
-        let controlButtonStack = initializeControlStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
+        let controlButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         controlStack.addArrangedSubview(controlButtonStack)
         
-        controlButtonStack.addArrangedSubview(initializeControlButton(title: "Start", color: UIColor.systemGreen))
-        controlButtonStack.addArrangedSubview(initializeControlButton(title: "Reset", color: UIColor.systemPink))
+        controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Start", color: UIColor.systemGreen))
+        controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Reset", color: UIColor.systemPink))
         
     }
     
-    func initializeControlButton(title: String, color: UIColor) -> UIButton {
+    func initializeCustomButton(title: String, color: UIColor) -> UIButton {
         let toReturn = UIButton()
         toReturn.setTitle(title, for: .normal)
         toReturn.titleLabel!.font = UIFont(name: "LexendDeca-Regular", size: TEXT_SIZE)
         toReturn.setTitleColor(UIColor.label, for: .normal)
         toReturn.backgroundColor = color
-        toReturn.cornerRadius = CGFloat(BUTTON_CORNER_RADIUS)
+        toReturn.cornerRadius = CGFloat(CONTROL_BUTTON_CORNER_RADIUS)
         return toReturn
     }
     
-    func initializeControlLabel(title: String) -> UILabel {
+    func initializeCustomLabel(title: String) -> UILabel {
         let toReturn = UILabel()
         toReturn.text = title
         toReturn.font = UIFont.init(name: "LexendDeca-Regular", size: TEXT_SIZE)
         return toReturn
     }
     
-    func initializeControlStack(axis: NSLayoutConstraint.Axis, spacing: Int) -> UIStackView {
+    func initializeCustomStack(axis: NSLayoutConstraint.Axis, spacing: Int) -> UIStackView {
         let toReturn = UIStackView()
         toReturn.axis = axis
         toReturn.alignment = .fill
@@ -150,48 +149,36 @@ class ViewController: UIViewController {
     
     //MARK: Initialize Grid Stacks
     func initializeGridStacks() {
-        let verticalStack = UIStackView()
-        verticalStack.axis = .vertical
-        verticalStack.alignment = .fill
-        verticalStack.distribution = .fillEqually
-        verticalStack.spacing = CGFloat(GRID_GAP_SIZE)
-        verticalStack.isUserInteractionEnabled = true
+        verticalGridStack = initializeCustomStack(axis: .vertical, spacing: GRID_GAP_SIZE)
         
-        let verticalStackConstraints: [NSLayoutConstraint] = [
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: verticalStack.trailingAnchor, constant: 20),
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: verticalStack.leadingAnchor, constant: -20),
-            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: verticalStack.topAnchor, constant: -20),
-            verticalStack.heightAnchor.constraint(equalTo: verticalStack.widthAnchor)
+        let gridStackConstraints: [NSLayoutConstraint] = [
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: verticalGridStack!.trailingAnchor, constant: 20),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: verticalGridStack!.leadingAnchor, constant: -20),
+            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: verticalGridStack!.topAnchor, constant: -20),
+            verticalGridStack!.heightAnchor.constraint(equalTo: verticalGridStack!.widthAnchor)
         ]
         
-        verticalStack.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(verticalStack)
-        NSLayoutConstraint.activate(verticalStackConstraints)
-        gridStack = verticalStack
+        verticalGridStack!.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(verticalGridStack!)
+        NSLayoutConstraint.activate(gridStackConstraints)
         
         
         for _ in 1...GRID_SIZE {
-            let horizontalStackView = UIStackView()
-            horizontalStackView.isUserInteractionEnabled = true
-            horizontalStackView.axis = .horizontal
-            horizontalStackView.alignment = .fill
-            horizontalStackView.distribution = .fillEqually
-            horizontalStackView.spacing = CGFloat(GRID_GAP_SIZE)
-            horizontalStacks.append(horizontalStackView)
-            verticalStack.addArrangedSubview(horizontalStackView)
+            let horizontalStackView = initializeCustomStack(axis: .horizontal, spacing: GRID_GAP_SIZE)
+            verticalGridStack!.addArrangedSubview(horizontalStackView)
         }
         
     }
     
     //MARK: Initialize Grid Nodes
     func initializeGridNodes() {
-        for horizontalStack in horizontalStacks {
+        for horizontalStack in verticalGridStack!.arrangedSubviews {
             for _ in 1...GRID_SIZE {
                 let node = UIView()
                 node.backgroundColor = UIColor.systemFill
                 node.cornerRadius = CGFloat(GRID_NODE_CORNER_RADIUS)
                 node.isUserInteractionEnabled = true
-                horizontalStack.addArrangedSubview(node)
+                (horizontalStack as! UIStackView).addArrangedSubview(node)
                 nodes.append(node)
             }
         }
