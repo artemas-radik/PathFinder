@@ -26,6 +26,8 @@ class ViewController: UIViewController {
     let CONTROL_BUTTON_ANIMATION_DURATION = 0.2
     
     var nodes: [[Node]] = []
+    var startNode: Node? = nil
+    var endNode: Node? = nil
     var verticalGridStack: UIStackView? = nil
     var drawtype: Node.NodeType = .wall
     
@@ -43,23 +45,153 @@ class ViewController: UIViewController {
         initializeGrid()
         initializeControls()
         
-        let thread = Thread.init(target: self, selector: #selector(someAsyncFunction), object: nil)
-        thread.start()
-        
+//        let thread = Thread.init(target: self, selector: #selector(someAsyncFunction), object: nil)
+//        thread.start()
     }
     
     @objc func someAsyncFunction() {
       // Something that takes some time to complete.
-        
         for node in nodes[0] {
-            
             DispatchQueue.main.async {
                 node.view.backgroundColor = UIColor.systemYellow
             }
-            
             usleep(500000)
-            
             print(Thread.current)
+        }
+    }
+    
+    @objc func asyncBFS() {
+        
+        var startNodeCoordinates: (Int?, Int?) = (nil, nil)
+        
+        for row in 0...nodes.count-1 {
+            for column in 0...nodes[row].count-1 {
+                if nodes[row][column] === startNode! {
+                    startNodeCoordinates = (row, column)
+                }
+            }
+        }
+        
+        let queue = Queue<(Int?, Int?)>()
+        queue.enQueue(item: startNodeCoordinates)
+        
+        while queue.size > 0 {
+            
+            let currentCoordinates = queue.deQueue()
+            let currentNode = nodes[currentCoordinates.0!][currentCoordinates.1!]
+            
+            if currentNode === endNode {
+                return
+            }
+            
+            if currentNode.isVisited {
+                continue
+            }
+            
+            currentNode.isVisited = true
+            
+            DispatchQueue.main.async {
+                
+                if currentNode.type != .end && currentNode.type != .start {
+                    currentNode.view.backgroundColor = UIColor.systemYellow
+                }
+                
+            }
+            
+            //go right
+            let rightCoordinates = (currentCoordinates.0!, currentCoordinates.1!+1)
+            if rightCoordinates.1 <= nodes[rightCoordinates.0].count-1 && !nodes[rightCoordinates.0][rightCoordinates.1].isVisited && nodes[rightCoordinates.0][rightCoordinates.1].type != .wall {
+                queue.enQueue(item: rightCoordinates)
+                
+                let rightNode = nodes[rightCoordinates.0][rightCoordinates.1]
+                rightNode.parent = currentNode
+                
+                DispatchQueue.main.async {
+                    
+                    if rightNode.type != .end && rightNode.type != .start {
+                        rightNode.view.backgroundColor = UIColor.systemGreen
+                    }
+                    
+                }
+                
+                usleep(5000)
+                
+            }
+            
+            //go up
+            let upCoordinates = (currentCoordinates.0!-1, currentCoordinates.1!)
+            if upCoordinates.0 >= 0 && !nodes[upCoordinates.0][upCoordinates.1].isVisited && nodes[upCoordinates.0][upCoordinates.1].type != .wall {
+                queue.enQueue(item: upCoordinates)
+                
+                let upNode = nodes[upCoordinates.0][upCoordinates.1]
+                upNode.parent = currentNode
+                
+                DispatchQueue.main.async {
+                    
+                    if upNode.type != .end && upNode.type != .start {
+                        upNode.view.backgroundColor = UIColor.systemGreen
+                    }
+                    
+                }
+                
+                usleep(5000)
+                
+            }
+            
+            // go left
+            let leftCoordinates = (currentCoordinates.0!, currentCoordinates.1!-1)
+            if leftCoordinates.1 >= 0 && !nodes[leftCoordinates.0][leftCoordinates.1].isVisited && nodes[leftCoordinates.0][leftCoordinates.1].type != .wall {
+                queue.enQueue(item: leftCoordinates)
+                
+                let leftNode = nodes[leftCoordinates.0][leftCoordinates.1]
+                leftNode.parent = currentNode
+                
+                DispatchQueue.main.async {
+                    
+                    if leftNode.type != .end && leftNode.type != .start {
+                        leftNode.view.backgroundColor = UIColor.systemGreen
+                    }
+                    
+                }
+                
+                usleep(5000)
+                
+            }
+            
+            //go down
+            let downCoordinates = (currentCoordinates.0!+1, currentCoordinates.1!)
+            if downCoordinates.0 <= nodes.count-1 && !nodes[downCoordinates.0][downCoordinates.1].isVisited && nodes[downCoordinates.0][downCoordinates.1].type != .wall {
+                queue.enQueue(item: downCoordinates)
+                
+                let downNode = nodes[downCoordinates.0][downCoordinates.1]
+                downNode.parent = currentNode
+                
+                DispatchQueue.main.async {
+                    
+                    if downNode.type != .end && downNode.type != .start {
+                        downNode.view.backgroundColor = UIColor.systemGreen
+                    }
+                    
+                }
+                
+                usleep(5000)
+                
+            }
+            
+        }
+        
+        let currentNode = endNode!.parent
+        
+        while(currentNode != nil) {
+            
+            DispatchQueue.main.async {
+                
+                if currentNode!.type != .end && currentNode!.type != .start {
+                    currentNode!.view.backgroundColor = UIColor.systemIndigo
+                }
+                
+            }
+            
             
         }
         
@@ -86,15 +218,23 @@ class ViewController: UIViewController {
                     switch drawtype {
                         case .wall:
                             node.view.backgroundColor = UIColor.systemPink
+                            node.type = .wall
                         case .space:
                             node.view.backgroundColor = UIColor.systemFill
+                            node.type = .space
                         case .start:
-                            node.view.backgroundColor = UIColor.systemIndigo
+                            startNode?.view.backgroundColor = UIColor.systemFill
+                            startNode?.type = .space
+                            startNode = node
+                            startNode?.view.backgroundColor = UIColor.systemIndigo
+                            startNode?.type = .start
                         case .end:
-                            node.view.backgroundColor = UIColor.systemBlue
+                            endNode?.view.backgroundColor = UIColor.systemFill
+                            endNode?.type = .space
+                            endNode = node
+                            endNode?.view.backgroundColor = UIColor.systemBlue
+                            endNode?.type = .end
                     }
-                    
-                    node.type = drawtype
                     
                 }
             }
@@ -285,6 +425,11 @@ class ViewController: UIViewController {
                         node.view.backgroundColor = UIColor.systemFill
                     }
                 }
+            
+            case "Find Path":
+                let thread = Thread.init(target: self, selector: #selector(asyncBFS), object: nil)
+                thread.start()
+            
             default:
                 break
         }
@@ -327,6 +472,7 @@ class Node {
     var view: UIView
     var type: NodeType = .space
     var isVisited: Bool = false
+    var parent: Node? = nil
     
     init(view: UIView) {
         self.view = view
@@ -334,6 +480,50 @@ class Node {
     
 }
 
+//MARK: Queue Class
+
+class Queue<T> {
+    
+    class Node<T> {
+        let data: T?
+        var left: Node<T>?
+        var right: Node<T>?
+        
+        init(data: T?, left: Node<T>?, right: Node<T>?) {
+            self.data = data
+            self.left = left
+            self.right = right
+        }
+    }
+    
+    var size: Int
+    let head: Node<T>
+    let tail: Node<T>
+    
+    init() {
+        size = 0
+        head = Node<T>(data: nil, left: nil, right: nil)
+        tail = Node<T>(data: nil, left: head, right: nil)
+        head.right = tail
+    }
+    
+    func enQueue(item: T) {
+        let previous = tail.left
+        let newNode = Node(data: item, left: previous, right: tail)
+        tail.left = newNode
+        previous!.right = newNode
+        size+=1
+    }
+    
+    func deQueue() -> T{
+        let toExtractDataFrom = head.right
+        head.right = head.right!.right!
+        head.right!.left! = head
+        size-=1
+        return toExtractDataFrom!.data!
+    }
+    
+}
 
 
     
