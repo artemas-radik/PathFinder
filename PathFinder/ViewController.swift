@@ -201,7 +201,6 @@ class ViewController: UIViewController {
     }
     
     //MARK: Control Button Handlers
-    
     @objc func controlButtonTouchUpInside(sender: UIButton!) {
        print("Button touched up inside")
         
@@ -242,6 +241,28 @@ class ViewController: UIViewController {
     }
     
 }
+
+//MARK: Node Class
+
+class Node {
+    
+    enum NodeType {
+        case wall
+        case space
+        case start
+        case end
+    }
+    
+    var view: UIView
+    var type: NodeType = .space
+    var isVisited: Bool = false
+    
+    init(view: UIView) {
+        self.view = view
+    }
+    
+}
+
 
 
     
