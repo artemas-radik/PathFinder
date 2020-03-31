@@ -81,10 +81,10 @@ class ViewController: UIViewController {
             let currentNode = nodes[currentCoordinates.0!][currentCoordinates.1!]
             
             if currentNode === endNode {
-                return
+                break
             }
             
-            if currentNode.isVisited {
+            if currentNode.isVisited || currentNode.type == .wall {
                 continue
             }
             
@@ -180,9 +180,9 @@ class ViewController: UIViewController {
             
         }
         
-        let currentNode = endNode!.parent
+        var currentNode = endNode!.parent
         
-        while(currentNode != nil) {
+        while(currentNode !== startNode) {
             
             DispatchQueue.main.async {
                 
@@ -192,6 +192,9 @@ class ViewController: UIViewController {
                 
             }
             
+            usleep(50000)
+            
+            currentNode = currentNode?.parent
             
         }
         
@@ -423,6 +426,8 @@ class ViewController: UIViewController {
                         node.isVisited = false
                         node.type = .space
                         node.view.backgroundColor = UIColor.systemFill
+                        startNode = nil
+                        endNode = nil
                     }
                 }
             
