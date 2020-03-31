@@ -216,7 +216,7 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 
                 if currentNode!.type != .end && currentNode!.type != .start {
-                    currentNode!.view.backgroundColor = UIColor.systemIndigo
+                    currentNode!.view.backgroundColor = UIColor.systemTeal
                 }
                 
             }
@@ -225,6 +225,12 @@ class ViewController: UIViewController {
             
             currentNode = currentNode?.parent
             
+        }
+        
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+            self.present(alertController, animated: true, completion: nil)
         }
         
     }
