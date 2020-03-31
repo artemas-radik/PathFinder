@@ -62,6 +62,25 @@ class ViewController: UIViewController {
     
     @objc func asyncBFS() {
         
+        if startNode == nil {
+            DispatchQueue.main.async {
+                let alertController = UIAlertController(title: "No Start Node Found!", message: "Please add a start node with the draw start node tool.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+                self.present(alertController, animated: true, completion: nil)
+            }
+            return
+        }
+        
+        else if endNode == nil {
+            DispatchQueue.main.async {
+                let alertController = UIAlertController(title: "No End Node Found!", message: "Please add an end node with the draw end node tool.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+                self.present(alertController, animated: true, completion: nil)
+            }
+            return
+        }
+        
+        
         var startNodeCoordinates: (Int?, Int?) = (nil, nil)
         
         for row in 0...nodes.count-1 {
@@ -181,6 +200,16 @@ class ViewController: UIViewController {
         }
         
         var currentNode = endNode!.parent
+        
+        if currentNode == nil {
+            DispatchQueue.main.async {
+                let alertController = UIAlertController(title: "No Path Found.", message: "There is no path present from the start node to the end node.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+                self.present(alertController, animated: true, completion: nil)
+            }
+            return
+        }
+        
         
         while(currentNode !== startNode) {
             
@@ -425,6 +454,7 @@ class ViewController: UIViewController {
                     for node in nodeRow {
                         node.isVisited = false
                         node.type = .space
+                        node.parent = nil
                         node.view.backgroundColor = UIColor.systemFill
                         startNode = nil
                         endNode = nil
