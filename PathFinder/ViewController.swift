@@ -277,6 +277,14 @@ class ViewController: UIViewController {
                 solveAlgorithm = .DFS
             case "Breadth-First-Search":
                 solveAlgorithm = .BFS
+            case "Reset":
+                for nodeRow in nodes {
+                    for node in nodeRow {
+                        node.isVisited = false
+                        node.type = .space
+                        node.view.backgroundColor = UIColor.systemFill
+                    }
+                }
             default:
                 break
         }
