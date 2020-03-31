@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     let CONTROL_BUTTON_ALPHA_MIN: CGFloat = 0.4
     let CONTROL_BUTTON_ANIMATION_DURATION = 0.2
     
-    var nodes: [UIView]! = []
+    var nodes: [[Node]] = []
     var verticalGridStack: UIStackView? = nil
     
     //MARK: View Did Load
@@ -40,19 +40,21 @@ class ViewController: UIViewController {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
         guard let touch = event?.allTouches?.first else {return}
-        nodes.forEach { (node) in
-            if node.frame.contains(touch.location(in: node.superview)) {
-                node.backgroundColor = UIColor.systemGreen
-            }
-        }
+        respondToTouch(touch: touch)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         guard let touch = event?.allTouches?.first else {return}
-        nodes.forEach { (node) in
-            if node.frame.contains(touch.location(in: node.superview)) {
-                node.backgroundColor = UIColor.systemGreen
+        respondToTouch(touch: touch)
+    }
+    
+    func respondToTouch(touch: UITouch) {
+        for nodeRow in nodes {
+            for node in nodeRow {
+                if node.view.frame.contains(touch.location(in: node.view.superview)) {
+                    node.view.backgroundColor = UIColor.systemGreen
+                }
             }
         }
     }
@@ -127,13 +129,14 @@ class ViewController: UIViewController {
     //MARK: Initialize Grid Nodes
     func initializeGridNodes() {
         for horizontalStack in verticalGridStack!.arrangedSubviews {
-            for _ in 1...GRID_SIZE {
-                let node = UIView()
-                node.backgroundColor = UIColor.systemFill
-                node.cornerRadius = CGFloat(GRID_NODE_CORNER_RADIUS)
-                node.isUserInteractionEnabled = true
-                (horizontalStack as! UIStackView).addArrangedSubview(node)
-                nodes.append(node)
+            nodes.append([])
+            for _ in 0...GRID_SIZE-1 {
+                let nodeView = UIView()
+                nodeView.backgroundColor = UIColor.systemFill
+                nodeView.cornerRadius = CGFloat(GRID_NODE_CORNER_RADIUS)
+                nodeView.isUserInteractionEnabled = true
+                (horizontalStack as! UIStackView).addArrangedSubview(nodeView)
+                nodes[nodes.count-1].append(Node(view: nodeView))
             }
         }
     }
