@@ -27,6 +27,14 @@ class ViewController: UIViewController {
     
     var nodes: [[Node]] = []
     var verticalGridStack: UIStackView? = nil
+    var drawtype: Node.NodeType = .wall
+    
+    enum SolveAlgorithm {
+        case DFS
+        case BFS
+    }
+    
+    var solveAlgorithm: SolveAlgorithm = .DFS
     
     //MARK: View Did Load
     override func viewDidLoad() {
@@ -34,6 +42,27 @@ class ViewController: UIViewController {
         view.isUserInteractionEnabled = true
         initializeGrid()
         initializeControls()
+        
+        let thread = Thread.init(target: self, selector: #selector(someAsyncFunction), object: nil)
+        thread.start()
+        
+    }
+    
+    @objc func someAsyncFunction() {
+      // Something that takes some time to complete.
+        
+        for node in nodes[0] {
+            
+            DispatchQueue.main.async {
+                node.view.backgroundColor = UIColor.systemYellow
+            }
+            
+            usleep(500000)
+            
+            print(Thread.current)
+            
+        }
+        
     }
     
     //MARK: Drag and Touch Detection
@@ -53,7 +82,20 @@ class ViewController: UIViewController {
         for nodeRow in nodes {
             for node in nodeRow {
                 if node.view.frame.contains(touch.location(in: node.view.superview)) {
-                    node.view.backgroundColor = UIColor.systemGreen
+                    
+                    switch drawtype {
+                        case .wall:
+                            node.view.backgroundColor = UIColor.systemPink
+                        case .space:
+                            node.view.backgroundColor = UIColor.systemFill
+                        case .start:
+                            node.view.backgroundColor = UIColor.systemIndigo
+                        case .end:
+                            node.view.backgroundColor = UIColor.systemBlue
+                    }
+                    
+                    node.type = drawtype
+                    
                 }
             }
         }
@@ -193,13 +235,13 @@ class ViewController: UIViewController {
         let controlStack = initializeCustomStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
         bigStack.addArrangedSubview(controlStack)
         
-        controlStack.addArrangedSubview(initializeCustomLabel(title: "START, STOP, AND RESET"))
+        controlStack.addArrangedSubview(initializeCustomLabel(title: "FIND PATH, STOP, AND RESET"))
         
         let controlButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         controlStack.addArrangedSubview(controlButtonStack)
         
-        controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Start", color: UIColor.systemGreen, alpha: CONTROL_BUTTON_ALPHA_MAX))
-        controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Reset", color: UIColor.systemPink))
+        controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Find Path", color: UIColor.systemGreen, alpha: CONTROL_BUTTON_ALPHA_MAX))
+        controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Reset", color: UIColor.systemPink, alpha: CONTROL_BUTTON_ALPHA_MAX))
         
     }
     
@@ -214,11 +256,29 @@ class ViewController: UIViewController {
                 }
             }
             
-            else {
+            else if sender.titleLabel!.text != "Find Path" && sender.titleLabel?.text != "Stop" && sender.titleLabel?.text != "Reset"  {
+                
                 UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
                     button.alpha = self.CONTROL_BUTTON_ALPHA_MIN
                 }
             }
+        }
+        
+        switch sender.titleLabel?.text {
+            case "Wall":
+                drawtype = .wall
+            case "Space":
+                drawtype = .space
+            case "Start":
+                drawtype = .start
+            case "End":
+                drawtype = .end
+            case "Depth-First-Search":
+                solveAlgorithm = .DFS
+            case "Breadth-First-Search":
+                solveAlgorithm = .BFS
+            default:
+                break
         }
         
     }
