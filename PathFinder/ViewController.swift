@@ -24,12 +24,17 @@ class ViewController: UIViewController {
     let CONTROL_BUTTON_ALPHA_MAX: CGFloat = 1.0
     let CONTROL_BUTTON_ALPHA_MIN: CGFloat = 0.4
     let CONTROL_BUTTON_ANIMATION_DURATION = 0.2
+    let SPEED_SLIDER_MIN: Float = 5000
+    let SPEED_SLIDER_MAX: Float = 50000
     
     var nodes: [[Node]] = []
     var startNode: Node? = nil
     var endNode: Node? = nil
     var verticalGridStack: UIStackView? = nil
     var drawtype: Node.NodeType = .wall
+    var speed: Float = 0
+    var thread: Thread? = nil
+    var threadIsCancelled = false
     
     enum SolveAlgorithm {
         case DFS
@@ -55,7 +60,7 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 node.view.backgroundColor = UIColor.systemYellow
             }
-            usleep(500000)
+            usleep(useconds_t((speed)))
             print(Thread.current)
         }
     }
@@ -133,7 +138,7 @@ class ViewController: UIViewController {
                     
                 }
                 
-                usleep(5000)
+                usleep(useconds_t(speed))
                 
             }
             
@@ -153,7 +158,7 @@ class ViewController: UIViewController {
                     
                 }
                 
-                usleep(5000)
+                usleep(useconds_t(speed))
                 
             }
             
@@ -173,7 +178,7 @@ class ViewController: UIViewController {
                     
                 }
                 
-                usleep(5000)
+                usleep(useconds_t(speed))
                 
             }
             
@@ -193,7 +198,7 @@ class ViewController: UIViewController {
                     
                 }
                 
-                usleep(5000)
+                usleep(useconds_t(speed))
                 
             }
             
@@ -221,7 +226,7 @@ class ViewController: UIViewController {
                 
             }
             
-            usleep(50000)
+            usleep(useconds_t(speed*6))
             
             currentNode = currentNode?.parent
             
@@ -407,7 +412,13 @@ class ViewController: UIViewController {
         bigStack.addArrangedSubview(speedStack)
         
         speedStack.addArrangedSubview(initializeCustomLabel(title: "SET SOLVE SPEED"))
-        speedStack.addArrangedSubview(UISlider())
+        let speedSlider = UISlider()
+        speedSlider.minimumValue = SPEED_SLIDER_MIN
+        speedSlider.maximumValue = SPEED_SLIDER_MAX
+        speedSlider.value = (SPEED_SLIDER_MAX + SPEED_SLIDER_MIN) / 2
+        speedSlider.addTarget(self, action: #selector(speedSliderDidChange(sender:)), for: .valueChanged)
+        speed = speedSlider.maximumValue - speedSlider.value + speedSlider.minimumValue
+        speedStack.addArrangedSubview(speedSlider)
         
         //Controls, Controls.
         let controlStack = initializeCustomStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
@@ -456,21 +467,11 @@ class ViewController: UIViewController {
             case "Breadth-First-Search":
                 solveAlgorithm = .BFS
             case "Reset":
-                for nodeRow in nodes {
-                    for node in nodeRow {
-                        node.isVisited = false
-                        node.type = .space
-                        node.parent = nil
-                        node.view.backgroundColor = UIColor.systemFill
-                        startNode = nil
-                        endNode = nil
-                    }
-                }
-            
+                reset()
             case "Find Path":
-                let thread = Thread.init(target: self, selector: #selector(asyncBFS), object: nil)
-                thread.start()
-            
+                threadIsCancelled = false
+                thread = Thread.init(target: self, selector: #selector(asyncBFS), object: nil)
+                thread!.start()
             default:
                 break
         }
@@ -494,6 +495,24 @@ class ViewController: UIViewController {
         
         UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
             sender.alpha = CGFloat(self.mostRecentAlpha)
+        }
+    }
+    
+    @objc func speedSliderDidChange(sender: UISlider!) {
+        speed = sender.maximumValue - sender.value + sender.minimumValue
+    }
+
+    func reset() {
+        threadIsCancelled = true
+        for nodeRow in nodes {
+            for node in nodeRow {
+                node.isVisited = false
+                node.type = .space
+                node.parent = nil
+                node.view.backgroundColor = UIColor.systemFill
+                startNode = nil
+                endNode = nil
+            }
         }
     }
     
