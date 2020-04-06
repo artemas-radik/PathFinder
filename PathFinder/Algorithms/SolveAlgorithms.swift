@@ -23,18 +23,6 @@ class SolveAlgorithms {
     
     static var viewController: UIViewController? = nil
     
-    static func showAlert(title: String, message: String) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-            
-            if !ViewController.threadIsCancelled {
-                SolveAlgorithms.viewController!.present(alertController, animated: true, completion: nil)
-            }
-            
-        }
-    }
-    
     static func reset() {
         ViewController.threadIsCancelled = true
         for nodeRow in SolveAlgorithms.nodes {
@@ -53,15 +41,35 @@ class SolveAlgorithms {
         }
     }
     
-    @objc static func asyncBFS() {
-        
+    static func showAlert(title: String, message: String) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+            
+            if !ViewController.threadIsCancelled {
+                SolveAlgorithms.viewController!.present(alertController, animated: true, completion: nil)
+            }
+            
+        }
+    }
+    
+    static func checkStartConditions() -> Bool {
         if SolveAlgorithms.startNode == nil {
             showAlert(title: "No Start Node Found!", message: "Please add a start node with the draw start node tool.")
-            return
+            return false
         }
         
         else if SolveAlgorithms.endNode == nil {
             showAlert(title: "No End Node Found!", message: "Please add an end node with the draw end node tool.")
+            return false
+        }
+        
+        return true
+    }
+    
+    @objc static func asyncBFS() {
+        
+        if !checkStartConditions() {
             return
         }
         

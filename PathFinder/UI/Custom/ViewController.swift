@@ -11,9 +11,9 @@ import UIKit
 class ViewController: UIViewController {
 
     //MARK: Globals
-    let GRID_SIZE = 10
-    let GRID_GAP_SIZE = 2
-    let GRID_NODE_CORNER_RADIUS = 4
+    let GRID_SIZE = 16
+    let GRID_GAP_SIZE = 1
+    let GRID_NODE_CORNER_RADIUS = 3
     let TEXT_SIZE = (1.2/71) * UIScreen.main.bounds.height
     let CONTROL_BUTTON_CORNER_RADIUS = 10
     let BIG_STACK_SPACING = 10
