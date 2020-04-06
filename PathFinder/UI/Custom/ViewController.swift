@@ -197,7 +197,6 @@ class ViewController: UIViewController {
     
     //MARK: Control Button Handlers
     @objc func controlButtonTouchUpInside(sender: UIButton!) {
-       print("Button touched up inside")
         
         for button in (sender.superview as! UIStackView).arrangedSubviews {
             if button == sender {
@@ -241,7 +240,6 @@ class ViewController: UIViewController {
     var mostRecentAlpha = 1.0
     
     @objc func controlButtonTouchDown(sender: UIButton!) {
-       print("Button touched down")
         
         self.mostRecentAlpha = Double(sender.alpha)
         
@@ -251,7 +249,6 @@ class ViewController: UIViewController {
     }
     
     @objc func controlButtonTouchDragExit(sender: UIButton!) {
-       print("Button touch dragged exited")
         
         UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
             sender.alpha = CGFloat(self.mostRecentAlpha)
