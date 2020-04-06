@@ -27,7 +27,11 @@ class SolveAlgorithms {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-            SolveAlgorithms.viewController!.present(alertController, animated: true, completion: nil)
+            
+            if !ViewController.threadIsCancelled {
+                SolveAlgorithms.viewController!.present(alertController, animated: true, completion: nil)
+            }
+            
         }
     }
     
@@ -38,7 +42,11 @@ class SolveAlgorithms {
                 node.isVisited = false
                 node.type = .space
                 node.parent = nil
-                node.view.backgroundColor = UIColor.systemFill
+                
+                DispatchQueue.main.async {
+                    node.view.backgroundColor = UIColor.systemFill
+                }
+                
                 SolveAlgorithms.startNode = nil
                 SolveAlgorithms.endNode = nil
             }
