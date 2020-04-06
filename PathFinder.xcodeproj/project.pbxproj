@@ -86,6 +86,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C783E8C0243BC80D0056807F /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				C783E8BD243BBF8D0056807F /* Queue.swift */,
+				C783E8BB243BBF340056807F /* Node.swift */,
+				C72B5091243BA03800334E80 /* SolveAlgorithms.swift */,
+			);
+			path = Algorithms;
+			sourceTree = "<group>";
+		};
+		C783E8C1243BC8360056807F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C783E8C2243BC8730056807F /* Custom */,
+				C7D425E9242AD4B2001CE9E7 /* LexendDeca-Regular.ttf */,
+				C7D425B9242930B5001CE9E7 /* AppDelegate.swift */,
+				C7D425BB242930B5001CE9E7 /* SceneDelegate.swift */,
+				C7D425BF242930B5001CE9E7 /* Main.storyboard */,
+				C7D425C4242930C3001CE9E7 /* LaunchScreen.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C783E8C2243BC8730056807F /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				C7D425BD242930B5001CE9E7 /* ViewController.swift */,
+				C783E8B9243BBE1C0056807F /* UIViewExtension.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
 		C7D425AD242930B5001CE9E7 = {
 			isa = PBXGroup;
 			children = (
@@ -109,17 +141,9 @@
 		C7D425B8242930B5001CE9E7 /* PathFinder */ = {
 			isa = PBXGroup;
 			children = (
-				C7D425B9242930B5001CE9E7 /* AppDelegate.swift */,
-				C7D425BB242930B5001CE9E7 /* SceneDelegate.swift */,
-				C7D425BD242930B5001CE9E7 /* ViewController.swift */,
-				C783E8BD243BBF8D0056807F /* Queue.swift */,
-				C783E8B9243BBE1C0056807F /* UIViewExtension.swift */,
-				C783E8BB243BBF340056807F /* Node.swift */,
-				C72B5091243BA03800334E80 /* SolveAlgorithms.swift */,
-				C7D425E9242AD4B2001CE9E7 /* LexendDeca-Regular.ttf */,
-				C7D425BF242930B5001CE9E7 /* Main.storyboard */,
+				C783E8C1243BC8360056807F /* UI */,
+				C783E8C0243BC80D0056807F /* Algorithms */,
 				C7D425C2242930C3001CE9E7 /* Assets.xcassets */,
-				C7D425C4242930C3001CE9E7 /* LaunchScreen.storyboard */,
 				C7D425C7242930C3001CE9E7 /* Info.plist */,
 			);
 			path = PathFinder;
