@@ -72,6 +72,11 @@ class SolveAlgorithms {
         
         while queue.size > 0 {
             
+            if ViewController.threadIsCancelled {
+                SolveAlgorithms.reset()
+                return
+            }
+            
             let currentCoordinates = queue.deQueue()
             let currentNode = SolveAlgorithms.nodes[currentCoordinates.0!][currentCoordinates.1!]
             
@@ -87,8 +92,13 @@ class SolveAlgorithms {
             
             DispatchQueue.main.async {
                 
-                if currentNode.type != .end && currentNode.type != .start {
+                if currentNode.type != .end && currentNode.type != .start && !ViewController.threadIsCancelled {
                     currentNode.view.backgroundColor = UIColor.systemYellow
+                }
+                
+                else if ViewController.threadIsCancelled {
+                    SolveAlgorithms.reset()
+                    return
                 }
                 
             }
@@ -103,8 +113,13 @@ class SolveAlgorithms {
                 
                 DispatchQueue.main.async {
                     
-                    if rightNode.type != .end && rightNode.type != .start {
+                    if rightNode.type != .end && rightNode.type != .start && !ViewController.threadIsCancelled {
                         rightNode.view.backgroundColor = UIColor.systemGreen
+                    }
+                    
+                    else if ViewController.threadIsCancelled {
+                        SolveAlgorithms.reset()
+                        return
                     }
                     
                 }
@@ -121,8 +136,13 @@ class SolveAlgorithms {
                 
                 DispatchQueue.main.async {
                     
-                    if upNode.type != .end && upNode.type != .start {
+                    if upNode.type != .end && upNode.type != .start && !ViewController.threadIsCancelled {
                         upNode.view.backgroundColor = UIColor.systemGreen
+                    }
+                    
+                    else if ViewController.threadIsCancelled {
+                        SolveAlgorithms.reset()
+                        return
                     }
                     
                 }
@@ -140,8 +160,13 @@ class SolveAlgorithms {
                 
                 DispatchQueue.main.async {
                     
-                    if leftNode.type != .end && leftNode.type != .start {
+                    if leftNode.type != .end && leftNode.type != .start && !ViewController.threadIsCancelled {
                         leftNode.view.backgroundColor = UIColor.systemGreen
+                    }
+                    
+                    else if ViewController.threadIsCancelled {
+                        SolveAlgorithms.reset()
+                        return
                     }
                     
                 }
@@ -159,8 +184,13 @@ class SolveAlgorithms {
                 
                 DispatchQueue.main.async {
                     
-                    if downNode.type != .end && downNode.type != .start {
+                    if downNode.type != .end && downNode.type != .start && !ViewController.threadIsCancelled {
                         downNode.view.backgroundColor = UIColor.systemGreen
+                    }
+                    
+                    else if ViewController.threadIsCancelled {
+                        SolveAlgorithms.reset()
+                        return
                     }
                     
                 }
@@ -182,10 +212,14 @@ class SolveAlgorithms {
             
             DispatchQueue.main.async {
                 
-                if currentNode!.type != .end && currentNode!.type != .start {
+                if currentNode!.type != .end && currentNode!.type != .start && !ViewController.threadIsCancelled {
                     currentNode!.view.backgroundColor = UIColor.systemTeal
                 }
                 
+                else if ViewController.threadIsCancelled {
+                    SolveAlgorithms.reset()
+                    return
+                }
             }
             
             usleep(useconds_t(SolveAlgorithms.speed*3))
