@@ -31,6 +31,20 @@ class SolveAlgorithms {
         }
     }
     
+    static func reset() {
+        ViewController.threadIsCancelled = true
+        for nodeRow in SolveAlgorithms.nodes {
+            for node in nodeRow {
+                node.isVisited = false
+                node.type = .space
+                node.parent = nil
+                node.view.backgroundColor = UIColor.systemFill
+                SolveAlgorithms.startNode = nil
+                SolveAlgorithms.endNode = nil
+            }
+        }
+    }
+    
     @objc static func asyncBFS() {
         
         if SolveAlgorithms.startNode == nil {

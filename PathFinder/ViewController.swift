@@ -41,7 +41,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         SolveAlgorithms.viewController = self
-        initializeGrid()
+        initializeGridStacks()
+        initializeGridNodes()
         initializeControls()
     }
     
@@ -127,50 +128,6 @@ class ViewController: UIViewController {
         return toReturn
     }
     
-    //MARK: Initialize Grid
-    func initializeGrid() {
-        initializeGridStacks()
-        initializeGridNodes()
-    }
-        
-    //MARK: Initialize Grid Stacks
-    func initializeGridStacks() {
-        ViewController.verticalGridStack = initializeCustomStack(axis: .vertical, spacing: GRID_GAP_SIZE)
-        
-        let gridStackConstraints: [NSLayoutConstraint] = [
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: ViewController.verticalGridStack!.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: ViewController.verticalGridStack!.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
-            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: ViewController.verticalGridStack!.topAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
-            ViewController.verticalGridStack!.heightAnchor.constraint(equalTo: ViewController.verticalGridStack!.widthAnchor)
-        ]
-        
-        ViewController.verticalGridStack!.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(ViewController.verticalGridStack!)
-        NSLayoutConstraint.activate(gridStackConstraints)
-        
-        
-        for _ in 1...GRID_SIZE {
-            let horizontalStackView = initializeCustomStack(axis: .horizontal, spacing: GRID_GAP_SIZE)
-            ViewController.verticalGridStack!.addArrangedSubview(horizontalStackView)
-        }
-        
-    }
-        
-    //MARK: Initialize Grid Nodes
-    func initializeGridNodes() {
-        for horizontalStack in ViewController.verticalGridStack!.arrangedSubviews {
-            SolveAlgorithms.nodes.append([])
-            for _ in 0...GRID_SIZE-1 {
-                let nodeView = UIView()
-                nodeView.backgroundColor = UIColor.systemFill
-                nodeView.cornerRadius = CGFloat(GRID_NODE_CORNER_RADIUS)
-                nodeView.isUserInteractionEnabled = true
-                (horizontalStack as! UIStackView).addArrangedSubview(nodeView)
-                SolveAlgorithms.nodes[SolveAlgorithms.nodes.count-1].append(Node(view: nodeView))
-            }
-        }
-    }
-    
     //MARK: Initialize Controls
     func initializeControls() {
         
@@ -236,7 +193,6 @@ class ViewController: UIViewController {
         
         controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Find Path", color: UIColor.systemGreen, alpha: CONTROL_BUTTON_ALPHA_MAX))
         controlButtonStack.addArrangedSubview(initializeCustomButton(title: "Reset", color: UIColor.systemPink, alpha: CONTROL_BUTTON_ALPHA_MAX))
-        
     }
     
     //MARK: Control Button Handlers
@@ -272,7 +228,7 @@ class ViewController: UIViewController {
             case "Breadth-First-Search":
                 solveAlgorithm = .BFS
             case "Reset":
-                reset()
+                SolveAlgorithms.reset()
             case "Find Path":
                 ViewController.threadIsCancelled = false
                 ViewController.thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncBFS), object: nil)
@@ -280,7 +236,6 @@ class ViewController: UIViewController {
             default:
                 break
         }
-        
     }
     
     var mostRecentAlpha = 1.0
@@ -306,86 +261,40 @@ class ViewController: UIViewController {
     @objc func speedSliderDidChange(sender: UISlider!) {
         SolveAlgorithms.speed = sender.maximumValue - sender.value + sender.minimumValue
     }
-
-    func reset() {
-        ViewController.threadIsCancelled = true
-        for nodeRow in SolveAlgorithms.nodes {
-            for node in nodeRow {
-                node.isVisited = false
-                node.type = .space
-                node.parent = nil
-                node.view.backgroundColor = UIColor.systemFill
-                SolveAlgorithms.startNode = nil
-                SolveAlgorithms.endNode = nil
+        
+    //MARK: Initialize Grid Stacks
+    func initializeGridStacks() {
+        ViewController.verticalGridStack = initializeCustomStack(axis: .vertical, spacing: GRID_GAP_SIZE)
+        
+        let gridStackConstraints: [NSLayoutConstraint] = [
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: ViewController.verticalGridStack!.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: ViewController.verticalGridStack!.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: ViewController.verticalGridStack!.topAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
+            ViewController.verticalGridStack!.heightAnchor.constraint(equalTo: ViewController.verticalGridStack!.widthAnchor)
+        ]
+        
+        ViewController.verticalGridStack!.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(ViewController.verticalGridStack!)
+        NSLayoutConstraint.activate(gridStackConstraints)
+        
+        for _ in 1...GRID_SIZE {
+            let horizontalStackView = initializeCustomStack(axis: .horizontal, spacing: GRID_GAP_SIZE)
+            ViewController.verticalGridStack!.addArrangedSubview(horizontalStackView)
+        }
+    }
+        
+    //MARK: Initialize Grid Nodes
+    func initializeGridNodes() {
+        for horizontalStack in ViewController.verticalGridStack!.arrangedSubviews {
+            SolveAlgorithms.nodes.append([])
+            for _ in 0...GRID_SIZE-1 {
+                let nodeView = UIView()
+                nodeView.backgroundColor = UIColor.systemFill
+                nodeView.cornerRadius = CGFloat(GRID_NODE_CORNER_RADIUS)
+                nodeView.isUserInteractionEnabled = true
+                (horizontalStack as! UIStackView).addArrangedSubview(nodeView)
+                SolveAlgorithms.nodes[SolveAlgorithms.nodes.count-1].append(Node(view: nodeView))
             }
         }
     }
-    
-}
-
-//MARK: Node Class
-
-class Node {
-    
-    enum NodeType {
-        case wall
-        case space
-        case start
-        case end
-    }
-    
-    var view: UIView
-    var type: NodeType = .space
-    var isVisited: Bool = false
-    var parent: Node? = nil
-    
-    init(view: UIView) {
-        self.view = view
-    }
-    
-}
-
-//MARK: Queue Class
-
-class Queue<T> {
-    
-    class Node<T> {
-        let data: T?
-        var left: Node<T>?
-        var right: Node<T>?
-        
-        init(data: T?, left: Node<T>?, right: Node<T>?) {
-            self.data = data
-            self.left = left
-            self.right = right
-        }
-    }
-    
-    var size: Int
-    let head: Node<T>
-    let tail: Node<T>
-    
-    init() {
-        size = 0
-        head = Node<T>(data: nil, left: nil, right: nil)
-        tail = Node<T>(data: nil, left: head, right: nil)
-        head.right = tail
-    }
-    
-    func enQueue(item: T) {
-        let previous = tail.left
-        let newNode = Node(data: item, left: previous, right: tail)
-        tail.left = newNode
-        previous!.right = newNode
-        size+=1
-    }
-    
-    func deQueue() -> T{
-        let toExtractDataFrom = head.right
-        head.right = head.right!.right!
-        head.right!.left! = head
-        size-=1
-        return toExtractDataFrom!.data!
-    }
-    
 }
