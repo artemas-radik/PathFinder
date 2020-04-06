@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C72B5092243BA03800334E80 /* SolveAlgorithms.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72B5091243BA03800334E80 /* SolveAlgorithms.swift */; };
 		C7D425BA242930B5001CE9E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D425B9242930B5001CE9E7 /* AppDelegate.swift */; };
 		C7D425BC242930B5001CE9E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D425BB242930B5001CE9E7 /* SceneDelegate.swift */; };
 		C7D425BE242930B5001CE9E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D425BD242930B5001CE9E7 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C72B5091243BA03800334E80 /* SolveAlgorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveAlgorithms.swift; sourceTree = "<group>"; };
 		C7D425B6242930B5001CE9E7 /* PathFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PathFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D425B9242930B5001CE9E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7D425BB242930B5001CE9E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				C7D425B9242930B5001CE9E7 /* AppDelegate.swift */,
 				C7D425BB242930B5001CE9E7 /* SceneDelegate.swift */,
 				C7D425BD242930B5001CE9E7 /* ViewController.swift */,
+				C72B5091243BA03800334E80 /* SolveAlgorithms.swift */,
 				C7D425E9242AD4B2001CE9E7 /* LexendDeca-Regular.ttf */,
 				C7D425BF242930B5001CE9E7 /* Main.storyboard */,
 				C7D425C2242930C3001CE9E7 /* Assets.xcassets */,
@@ -266,6 +269,7 @@
 				C7D425BE242930B5001CE9E7 /* ViewController.swift in Sources */,
 				C7D425BA242930B5001CE9E7 /* AppDelegate.swift in Sources */,
 				C7D425BC242930B5001CE9E7 /* SceneDelegate.swift in Sources */,
+				C72B5092243BA03800334E80 /* SolveAlgorithms.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

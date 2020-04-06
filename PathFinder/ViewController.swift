@@ -27,19 +27,13 @@ class ViewController: UIViewController {
     let SPEED_SLIDER_MIN: Float = 5000
     let SPEED_SLIDER_MAX: Float = 50000
     
-    var nodes: [[Node]] = []
-    var startNode: Node? = nil
-    var endNode: Node? = nil
-    var verticalGridStack: UIStackView? = nil
-    var drawtype: Node.NodeType = .wall
-    var speed: Float = 0
-    var thread: Thread? = nil
-    var threadIsCancelled = false
+    static var viewController: UIViewController? = nil
+    static var verticalGridStack: UIStackView? = nil
     
-    enum SolveAlgorithm {
-        case DFS
-        case BFS
-    }
+    static var drawtype: Node.NodeType = .wall
+    
+    static var thread: Thread? = nil
+    static var threadIsCancelled = false
     
     var solveAlgorithm: SolveAlgorithm = .DFS
     
@@ -47,197 +41,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.isUserInteractionEnabled = true
+        SolveAlgorithms.viewController = self
         initializeGrid()
         initializeControls()
-        
-//        let thread = Thread.init(target: self, selector: #selector(someAsyncFunction), object: nil)
-//        thread.start()
-    }
-    
-    @objc func someAsyncFunction() {
-      // Something that takes some time to complete.
-        for node in nodes[0] {
-            DispatchQueue.main.async {
-                node.view.backgroundColor = UIColor.systemYellow
-            }
-            usleep(useconds_t((speed)))
-            print(Thread.current)
-        }
-    }
-    
-    @objc func asyncBFS() {
-        
-        if startNode == nil {
-            DispatchQueue.main.async {
-                let alertController = UIAlertController(title: "No Start Node Found!", message: "Please add a start node with the draw start node tool.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-                self.present(alertController, animated: true, completion: nil)
-            }
-            return
-        }
-        
-        else if endNode == nil {
-            DispatchQueue.main.async {
-                let alertController = UIAlertController(title: "No End Node Found!", message: "Please add an end node with the draw end node tool.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-                self.present(alertController, animated: true, completion: nil)
-            }
-            return
-        }
-        
-        
-        var startNodeCoordinates: (Int?, Int?) = (nil, nil)
-        
-        for row in 0...nodes.count-1 {
-            for column in 0...nodes[row].count-1 {
-                if nodes[row][column] === startNode! {
-                    startNodeCoordinates = (row, column)
-                }
-            }
-        }
-        
-        let queue = Queue<(Int?, Int?)>()
-        queue.enQueue(item: startNodeCoordinates)
-        
-        while queue.size > 0 {
-            
-            let currentCoordinates = queue.deQueue()
-            let currentNode = nodes[currentCoordinates.0!][currentCoordinates.1!]
-            
-            if currentNode === endNode {
-                break
-            }
-            
-            if currentNode.isVisited || currentNode.type == .wall {
-                continue
-            }
-            
-            currentNode.isVisited = true
-            
-            DispatchQueue.main.async {
-                
-                if currentNode.type != .end && currentNode.type != .start {
-                    currentNode.view.backgroundColor = UIColor.systemYellow
-                }
-                
-            }
-            
-            //go right
-            let rightCoordinates = (currentCoordinates.0!, currentCoordinates.1!+1)
-            if rightCoordinates.1 <= nodes[rightCoordinates.0].count-1 && !nodes[rightCoordinates.0][rightCoordinates.1].isVisited && nodes[rightCoordinates.0][rightCoordinates.1].type != .wall {
-                queue.enQueue(item: rightCoordinates)
-                
-                let rightNode = nodes[rightCoordinates.0][rightCoordinates.1]
-                rightNode.parent = currentNode
-                
-                DispatchQueue.main.async {
-                    
-                    if rightNode.type != .end && rightNode.type != .start {
-                        rightNode.view.backgroundColor = UIColor.systemGreen
-                    }
-                    
-                }
-                
-                usleep(useconds_t(speed))
-                
-            }
-            
-            //go up
-            let upCoordinates = (currentCoordinates.0!-1, currentCoordinates.1!)
-            if upCoordinates.0 >= 0 && !nodes[upCoordinates.0][upCoordinates.1].isVisited && nodes[upCoordinates.0][upCoordinates.1].type != .wall {
-                queue.enQueue(item: upCoordinates)
-                
-                let upNode = nodes[upCoordinates.0][upCoordinates.1]
-                upNode.parent = currentNode
-                
-                DispatchQueue.main.async {
-                    
-                    if upNode.type != .end && upNode.type != .start {
-                        upNode.view.backgroundColor = UIColor.systemGreen
-                    }
-                    
-                }
-                
-                usleep(useconds_t(speed))
-                
-            }
-            
-            // go left
-            let leftCoordinates = (currentCoordinates.0!, currentCoordinates.1!-1)
-            if leftCoordinates.1 >= 0 && !nodes[leftCoordinates.0][leftCoordinates.1].isVisited && nodes[leftCoordinates.0][leftCoordinates.1].type != .wall {
-                queue.enQueue(item: leftCoordinates)
-                
-                let leftNode = nodes[leftCoordinates.0][leftCoordinates.1]
-                leftNode.parent = currentNode
-                
-                DispatchQueue.main.async {
-                    
-                    if leftNode.type != .end && leftNode.type != .start {
-                        leftNode.view.backgroundColor = UIColor.systemGreen
-                    }
-                    
-                }
-                
-                usleep(useconds_t(speed))
-                
-            }
-            
-            //go down
-            let downCoordinates = (currentCoordinates.0!+1, currentCoordinates.1!)
-            if downCoordinates.0 <= nodes.count-1 && !nodes[downCoordinates.0][downCoordinates.1].isVisited && nodes[downCoordinates.0][downCoordinates.1].type != .wall {
-                queue.enQueue(item: downCoordinates)
-                
-                let downNode = nodes[downCoordinates.0][downCoordinates.1]
-                downNode.parent = currentNode
-                
-                DispatchQueue.main.async {
-                    
-                    if downNode.type != .end && downNode.type != .start {
-                        downNode.view.backgroundColor = UIColor.systemGreen
-                    }
-                    
-                }
-                
-                usleep(useconds_t(speed))
-                
-            }
-            
-        }
-        
-        var currentNode = endNode!.parent
-        
-        if currentNode == nil {
-            DispatchQueue.main.async {
-                let alertController = UIAlertController(title: "No Path Found.", message: "There is no path present from the start node to the end node.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-                self.present(alertController, animated: true, completion: nil)
-            }
-            return
-        }
-        
-        
-        while(currentNode !== startNode) {
-            
-            DispatchQueue.main.async {
-                
-                if currentNode!.type != .end && currentNode!.type != .start {
-                    currentNode!.view.backgroundColor = UIColor.systemTeal
-                }
-                
-            }
-            
-            usleep(useconds_t(speed*6))
-            
-            currentNode = currentNode?.parent
-            
-        }
-        
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-            self.present(alertController, animated: true, completion: nil)
-        }
-        
     }
     
     //MARK: Drag and Touch Detection
@@ -254,11 +60,11 @@ class ViewController: UIViewController {
     }
     
     func respondToTouch(touch: UITouch) {
-        for nodeRow in nodes {
+        for nodeRow in SolveAlgorithms.nodes {
             for node in nodeRow {
                 if node.view.frame.contains(touch.location(in: node.view.superview)) {
                     
-                    switch drawtype {
+                    switch ViewController.drawtype {
                         case .wall:
                             node.view.backgroundColor = UIColor.systemPink
                             node.type = .wall
@@ -266,17 +72,17 @@ class ViewController: UIViewController {
                             node.view.backgroundColor = UIColor.systemFill
                             node.type = .space
                         case .start:
-                            startNode?.view.backgroundColor = UIColor.systemFill
-                            startNode?.type = .space
-                            startNode = node
-                            startNode?.view.backgroundColor = UIColor.systemIndigo
-                            startNode?.type = .start
+                            SolveAlgorithms.startNode?.view.backgroundColor = UIColor.systemFill
+                            SolveAlgorithms.startNode?.type = .space
+                            SolveAlgorithms.startNode = node
+                            SolveAlgorithms.startNode?.view.backgroundColor = UIColor.systemIndigo
+                            SolveAlgorithms.startNode?.type = .start
                         case .end:
-                            endNode?.view.backgroundColor = UIColor.systemFill
-                            endNode?.type = .space
-                            endNode = node
-                            endNode?.view.backgroundColor = UIColor.systemBlue
-                            endNode?.type = .end
+                            SolveAlgorithms.endNode?.view.backgroundColor = UIColor.systemFill
+                            SolveAlgorithms.endNode?.type = .space
+                            SolveAlgorithms.endNode = node
+                            SolveAlgorithms.endNode?.view.backgroundColor = UIColor.systemBlue
+                            SolveAlgorithms.endNode?.type = .end
                     }
                     
                 }
@@ -330,38 +136,38 @@ class ViewController: UIViewController {
         
     //MARK: Initialize Grid Stacks
     func initializeGridStacks() {
-        verticalGridStack = initializeCustomStack(axis: .vertical, spacing: GRID_GAP_SIZE)
+        ViewController.verticalGridStack = initializeCustomStack(axis: .vertical, spacing: GRID_GAP_SIZE)
         
         let gridStackConstraints: [NSLayoutConstraint] = [
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: verticalGridStack!.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: verticalGridStack!.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
-            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: verticalGridStack!.topAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
-            verticalGridStack!.heightAnchor.constraint(equalTo: verticalGridStack!.widthAnchor)
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: ViewController.verticalGridStack!.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: ViewController.verticalGridStack!.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: ViewController.verticalGridStack!.topAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
+            ViewController.verticalGridStack!.heightAnchor.constraint(equalTo: ViewController.verticalGridStack!.widthAnchor)
         ]
         
-        verticalGridStack!.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(verticalGridStack!)
+        ViewController.verticalGridStack!.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(ViewController.verticalGridStack!)
         NSLayoutConstraint.activate(gridStackConstraints)
         
         
         for _ in 1...GRID_SIZE {
             let horizontalStackView = initializeCustomStack(axis: .horizontal, spacing: GRID_GAP_SIZE)
-            verticalGridStack!.addArrangedSubview(horizontalStackView)
+            ViewController.verticalGridStack!.addArrangedSubview(horizontalStackView)
         }
         
     }
         
     //MARK: Initialize Grid Nodes
     func initializeGridNodes() {
-        for horizontalStack in verticalGridStack!.arrangedSubviews {
-            nodes.append([])
+        for horizontalStack in ViewController.verticalGridStack!.arrangedSubviews {
+            SolveAlgorithms.nodes.append([])
             for _ in 0...GRID_SIZE-1 {
                 let nodeView = UIView()
                 nodeView.backgroundColor = UIColor.systemFill
                 nodeView.cornerRadius = CGFloat(GRID_NODE_CORNER_RADIUS)
                 nodeView.isUserInteractionEnabled = true
                 (horizontalStack as! UIStackView).addArrangedSubview(nodeView)
-                nodes[nodes.count-1].append(Node(view: nodeView))
+                SolveAlgorithms.nodes[SolveAlgorithms.nodes.count-1].append(Node(view: nodeView))
             }
         }
     }
@@ -375,7 +181,7 @@ class ViewController: UIViewController {
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: bigStack.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
             view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: bigStack.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bigStack.bottomAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
-            NSLayoutConstraint(item: bigStack, attribute: .top, relatedBy: .equal, toItem: verticalGridStack, attribute: .bottom, multiplier: 1, constant: STANDARD_CONSTRAINT_CONSTANT)
+            NSLayoutConstraint(item: bigStack, attribute: .top, relatedBy: .equal, toItem: ViewController.verticalGridStack, attribute: .bottom, multiplier: 1, constant: STANDARD_CONSTRAINT_CONSTANT)
         ]
         bigStack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bigStack)
@@ -417,7 +223,7 @@ class ViewController: UIViewController {
         speedSlider.maximumValue = SPEED_SLIDER_MAX
         speedSlider.value = (SPEED_SLIDER_MAX + SPEED_SLIDER_MIN) / 2
         speedSlider.addTarget(self, action: #selector(speedSliderDidChange(sender:)), for: .valueChanged)
-        speed = speedSlider.maximumValue - speedSlider.value + speedSlider.minimumValue
+        SolveAlgorithms.speed = speedSlider.maximumValue - speedSlider.value + speedSlider.minimumValue
         speedStack.addArrangedSubview(speedSlider)
         
         //Controls, Controls.
@@ -455,13 +261,13 @@ class ViewController: UIViewController {
         
         switch sender.titleLabel?.text {
             case "Wall":
-                drawtype = .wall
+                ViewController.drawtype = .wall
             case "Space":
-                drawtype = .space
+                ViewController.drawtype = .space
             case "Start":
-                drawtype = .start
+                ViewController.drawtype = .start
             case "End":
-                drawtype = .end
+                ViewController.drawtype = .end
             case "Depth-First-Search":
                 solveAlgorithm = .DFS
             case "Breadth-First-Search":
@@ -469,9 +275,9 @@ class ViewController: UIViewController {
             case "Reset":
                 reset()
             case "Find Path":
-                threadIsCancelled = false
-                thread = Thread.init(target: self, selector: #selector(asyncBFS), object: nil)
-                thread!.start()
+                ViewController.threadIsCancelled = false
+                ViewController.thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncBFS), object: nil)
+                ViewController.thread!.start()
             default:
                 break
         }
@@ -499,19 +305,19 @@ class ViewController: UIViewController {
     }
     
     @objc func speedSliderDidChange(sender: UISlider!) {
-        speed = sender.maximumValue - sender.value + sender.minimumValue
+        SolveAlgorithms.speed = sender.maximumValue - sender.value + sender.minimumValue
     }
 
     func reset() {
-        threadIsCancelled = true
-        for nodeRow in nodes {
+        ViewController.threadIsCancelled = true
+        for nodeRow in SolveAlgorithms.nodes {
             for node in nodeRow {
                 node.isVisited = false
                 node.type = .space
                 node.parent = nil
                 node.view.backgroundColor = UIColor.systemFill
-                startNode = nil
-                endNode = nil
+                SolveAlgorithms.startNode = nil
+                SolveAlgorithms.endNode = nil
             }
         }
     }
