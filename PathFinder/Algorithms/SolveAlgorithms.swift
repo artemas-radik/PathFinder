@@ -16,7 +16,7 @@ enum SolveAlgorithm {
 
 class SolveAlgorithms {
  
-    static let BACKTRACE_DELAY_MULTIPLIER = 4
+    static let BACKTRACE_DELAY_MULTIPLIER = 5
     
     static var nodes: [[Node]] = []
     static var startNode: Node? = nil
@@ -112,7 +112,14 @@ class SolveAlgorithms {
             usleep(useconds_t(SolveAlgorithms.speed * Float(BACKTRACE_DELAY_MULTIPLIER)))
             currentNode = currentNode?.parent
         }
-        ViewController.showAlert(title: "A Path Was Found!", message: "It is displayed in teal on the grid.")
+        
+        if ViewController.solveAlgorithm == .BFS {
+            ViewController.showAlert(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.")
+        }
+        
+        else if ViewController.solveAlgorithm == .DFS {
+            ViewController.showAlert(title: "A Path Was Found!", message: "It is displayed in teal on the grid.")
+        }
     }
     
     //MARK: asyncBFS

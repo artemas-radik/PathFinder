@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     
     static var threadIsCancelled = false
     
-    static var solveAlgorithm: SolveAlgorithm = .DFS
+    static var solveAlgorithm: SolveAlgorithm = .BFS
     
     //MARK: View Did Load
     override func viewDidLoad() {
@@ -198,8 +198,8 @@ class ViewController: UIViewController {
         let algorithmButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         algorithmStack.addArrangedSubview(algorithmButtonStack)
         
-        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Depth-First-Search", color: UIColor.systemOrange, alpha: CONTROL_BUTTON_ALPHA_MAX))
-        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Breadth-First-Search", color: UIColor.systemOrange))
+        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Breadth-First-Search", color: UIColor.systemOrange, alpha: CONTROL_BUTTON_ALPHA_MAX))
+        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Depth-First-Search", color: UIColor.systemOrange))
         
         //Speed Stack
         let speedStack = initializeCustomStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
@@ -230,17 +230,14 @@ class ViewController: UIViewController {
     //MARK: Control Button Handlers
     @objc func controlButtonTouchUpInside(sender: UIButton!) {
         
+        if ViewController.gridIsLocked && (sender.titleLabel?.text == "Depth-First-Search" || sender.titleLabel?.text == "Breadth-First-Search") {
+            return
+        }
+        
         for button in (sender.superview as! UIStackView).arrangedSubviews {
             if button == sender {
                 UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
                     sender.alpha = self.CONTROL_BUTTON_ALPHA_MAX
-                }
-            }
-            
-            else if sender.titleLabel!.text != "Find Path" && sender.titleLabel?.text != "Stop" && sender.titleLabel?.text != "Reset"  {
-                
-                UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
-                    button.alpha = self.CONTROL_BUTTON_ALPHA_MIN
                 }
             }
         }
@@ -260,19 +257,49 @@ class ViewController: UIViewController {
                 ViewController.solveAlgorithm = .BFS
             case "Reset":
                 SolveAlgorithms.reset()
+                return
             case "Find Path":
+                
+                if ViewController.gridIsLocked {
+                    return
+                }
+                
                 ViewController.gridIsLocked = true
                 ViewController.threadIsCancelled = false
-                let thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncDFS), object: nil)
-                thread.start()
+                
+                var thread: Thread? = nil
+                
+                if ViewController.solveAlgorithm == .BFS {
+                    thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncBFS), object: nil)
+                }
+                
+                else if ViewController.solveAlgorithm == .DFS {
+                    thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncDFS), object: nil)
+                }
+                
+                thread!.start()
+                return
+            
             default:
                 break
+        }
+        
+        for button in (sender.superview as! UIStackView).arrangedSubviews {
+            if button != sender {
+                UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
+                    button.alpha = self.CONTROL_BUTTON_ALPHA_MIN
+                }
+            }
         }
     }
     
     var mostRecentAlpha = 1.0
     
     @objc func controlButtonTouchDown(sender: UIButton!) {
+        
+        if ViewController.gridIsLocked && (sender.titleLabel?.text == "Depth-First-Search" || sender.titleLabel?.text == "Breadth-First-Search") {
+            return
+        }
         
         self.mostRecentAlpha = Double(sender.alpha)
         
@@ -282,6 +309,10 @@ class ViewController: UIViewController {
     }
     
     @objc func controlButtonTouchDragExit(sender: UIButton!) {
+        
+        if ViewController.gridIsLocked && (sender.titleLabel?.text == "Depth-First-Search" || sender.titleLabel?.text == "Breadth-First-Search") {
+            return
+        }
         
         UIView.animate(withDuration: CONTROL_BUTTON_ANIMATION_DURATION) {
             sender.alpha = CGFloat(self.mostRecentAlpha)
