@@ -21,8 +21,6 @@ class SolveAlgorithms {
     static var endNode: Node? = nil
     static var speed: Float = 0
     
-    static var viewController: UIViewController? = nil
-    
     //MARK: Utilities
     static func reset() {
         ViewController.threadIsCancelled = true
@@ -42,25 +40,14 @@ class SolveAlgorithms {
         }
     }
     
-    static func showAlert(title: String, message: String) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
-            
-            if !ViewController.threadIsCancelled {
-                SolveAlgorithms.viewController!.present(alertController, animated: true, completion: nil)
-            }
-        }
-    }
-    
     static func checkStartConditions() -> Bool {
         if SolveAlgorithms.startNode == nil {
-            showAlert(title: "No Start Node Found!", message: "Please add a start node with the draw start node tool.")
+            ViewController.showAlert(title: "No Start Node Found!", message: "Please add a start node with the draw start node tool.")
             return false
         }
         
         else if SolveAlgorithms.endNode == nil {
-            showAlert(title: "No End Node Found!", message: "Please add an end node with the draw end node tool.")
+            ViewController.showAlert(title: "No End Node Found!", message: "Please add an end node with the draw end node tool.")
             return false
         }
         
@@ -156,7 +143,7 @@ class SolveAlgorithms {
         var currentNode = SolveAlgorithms.endNode!.parent
         
         if currentNode == nil {
-            showAlert(title: "No Path Found.", message: "There is no path present from the start node to the end node.")
+            ViewController.showAlert(title: "No Path Found.", message: "There is no path present from the start node to the end node.")
             return
         }
         
@@ -165,7 +152,7 @@ class SolveAlgorithms {
             usleep(useconds_t(SolveAlgorithms.speed*5))
             currentNode = currentNode?.parent
         }
-        showAlert(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.")
+        ViewController.showAlert(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.")
     }
     
     static func asyncBFShelper(queue: Queue<(Int?, Int?)>, coordinates: (Int, Int), currentNode: Node) {

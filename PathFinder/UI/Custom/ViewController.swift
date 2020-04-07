@@ -35,15 +35,27 @@ class ViewController: UIViewController {
     static var thread: Thread? = nil
     static var threadIsCancelled = false
     
-    var solveAlgorithm: SolveAlgorithm = .DFS
+    static var solveAlgorithm: SolveAlgorithm = .DFS
     
     //MARK: View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
-        SolveAlgorithms.viewController = self
+        ViewController.viewController = self
         initializeGridStacks()
         initializeGridNodes()
         initializeControls()
+    }
+    
+    //MARK: Utilities
+    static func showAlert(title: String, message: String) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+            
+            if !ViewController.threadIsCancelled {
+                ViewController.viewController!.present(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
     //MARK: Drag and Touch Detection
@@ -223,9 +235,9 @@ class ViewController: UIViewController {
             case "End":
                 ViewController.drawtype = .end
             case "Depth-First-Search":
-                solveAlgorithm = .DFS
+                ViewController.solveAlgorithm = .DFS
             case "Breadth-First-Search":
-                solveAlgorithm = .BFS
+                ViewController.solveAlgorithm = .BFS
             case "Reset":
                 SolveAlgorithms.reset()
             case "Find Path":
