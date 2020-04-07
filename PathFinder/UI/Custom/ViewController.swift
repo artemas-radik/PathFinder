@@ -81,6 +81,12 @@ class ViewController: UIViewController {
             for node in nodeRow {
                 if node.view.frame.contains(touch.location(in: node.view.superview)) {
                     
+//                    node.view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                    
+                    UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 6, options: .allowUserInteraction, animations: {
+                        node.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                    }, completion: nil)
+                    
                     switch ViewController.drawtype {
                         case .wall:
                             if node.type == .end {
@@ -117,6 +123,11 @@ class ViewController: UIViewController {
                             SolveAlgorithms.endNode?.view.backgroundColor = UIColor.systemBlue
                             SolveAlgorithms.endNode?.type = .end
                     }
+                    
+                    UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 6, options: .allowUserInteraction, animations: {
+                        node.view.transform = CGAffineTransform.identity
+                    }, completion: nil)
+                    
                 }
             }
         }

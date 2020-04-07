@@ -62,7 +62,17 @@ class SolveAlgorithms {
     static func updateNode(node: Node, color: UIColor) {
         DispatchQueue.main.async {
             if node.type != .end && node.type != .start && !ViewController.threadIsCancelled {
+                
+                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 6, options: .allowUserInteraction, animations: {
+                    node.view.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
+                }, completion: nil)
+                
                 node.view.backgroundColor = color
+                
+                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 6, options: .allowUserInteraction, animations: {
+                    node.view.transform = CGAffineTransform.identity
+                }, completion: nil)
+                
             }
             
             else if ViewController.threadIsCancelled {
