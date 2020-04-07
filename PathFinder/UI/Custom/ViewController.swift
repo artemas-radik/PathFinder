@@ -11,13 +11,13 @@ import UIKit
 class ViewController: UIViewController {
 
     //MARK: Globals
-    let GRID_SIZE = 16
+    let GRID_SIZE = 12
     let GRID_GAP_SIZE = 1
     let GRID_NODE_CORNER_RADIUS = 3
     let TEXT_SIZE = (1.2/71) * UIScreen.main.bounds.height
     let CONTROL_BUTTON_CORNER_RADIUS = 10
-    let BIG_STACK_SPACING = 10
-    let SMALL_STACK_SPACING = 2
+    let BIG_STACK_SPACING = 5
+    let SMALL_STACK_SPACING = 1
     let OPTION_STACK_SPACING = 10
     let STANDARD_CONSTRAINT_CONSTANT: CGFloat = 20
     let FONT_NAME = "LexendDeca-Regular"
@@ -31,8 +31,8 @@ class ViewController: UIViewController {
     static var verticalGridStack: UIStackView? = nil
     
     static var drawtype: Node.NodeType = .wall
+    static var gridIsLocked = false
     
-    static var thread: Thread? = nil
     static var threadIsCancelled = false
     
     static var solveAlgorithm: SolveAlgorithm = .DFS
@@ -72,15 +72,36 @@ class ViewController: UIViewController {
     }
     
     func respondToTouch(touch: UITouch) {
+        
+        if ViewController.gridIsLocked {
+            return
+        }
+        
         for nodeRow in SolveAlgorithms.nodes {
             for node in nodeRow {
                 if node.view.frame.contains(touch.location(in: node.view.superview)) {
                     
                     switch ViewController.drawtype {
                         case .wall:
+                            if node.type == .end {
+                                SolveAlgorithms.endNode = nil
+                            }
+                                
+                            else if node.type == .start {
+                                SolveAlgorithms.startNode = nil
+                            }
+                            
                             node.view.backgroundColor = UIColor.systemPink
                             node.type = .wall
                         case .space:
+                            if node.type == .end {
+                                SolveAlgorithms.endNode = nil
+                            }
+                                
+                            else if node.type == .start {
+                                SolveAlgorithms.startNode = nil
+                            }
+                            
                             node.view.backgroundColor = UIColor.systemFill
                             node.type = .space
                         case .start:
@@ -148,7 +169,7 @@ class ViewController: UIViewController {
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: bigStack.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
             view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: bigStack.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bigStack.bottomAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
-            NSLayoutConstraint(item: bigStack, attribute: .top, relatedBy: .equal, toItem: ViewController.verticalGridStack, attribute: .bottom, multiplier: 1, constant: STANDARD_CONSTRAINT_CONSTANT)
+            NSLayoutConstraint(item: bigStack, attribute: .top, relatedBy: .equal, toItem: ViewController.verticalGridStack, attribute: .bottom, multiplier: 1, constant: STANDARD_CONSTRAINT_CONSTANT/2)
         ]
         bigStack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bigStack)
@@ -177,8 +198,8 @@ class ViewController: UIViewController {
         let algorithmButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         algorithmStack.addArrangedSubview(algorithmButtonStack)
         
-        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Depth-First-Search", color: UIColor.systemGreen, alpha: CONTROL_BUTTON_ALPHA_MAX))
-        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Breadth-First-Search", color: UIColor.systemGreen))
+        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Depth-First-Search", color: UIColor.systemOrange, alpha: CONTROL_BUTTON_ALPHA_MAX))
+        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Breadth-First-Search", color: UIColor.systemOrange))
         
         //Speed Stack
         let speedStack = initializeCustomStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
@@ -240,9 +261,10 @@ class ViewController: UIViewController {
             case "Reset":
                 SolveAlgorithms.reset()
             case "Find Path":
+                ViewController.gridIsLocked = true
                 ViewController.threadIsCancelled = false
-                ViewController.thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncDFS), object: nil)
-                ViewController.thread!.start()
+                let thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncDFS), object: nil)
+                thread.start()
             default:
                 break
         }

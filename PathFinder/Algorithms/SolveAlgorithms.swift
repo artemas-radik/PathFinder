@@ -16,6 +16,8 @@ enum SolveAlgorithm {
 
 class SolveAlgorithms {
  
+    static let BACKTRACE_DELAY_MULTIPLIER = 4
+    
     static var nodes: [[Node]] = []
     static var startNode: Node? = nil
     static var endNode: Node? = nil
@@ -38,16 +40,19 @@ class SolveAlgorithms {
                 SolveAlgorithms.endNode = nil
             }
         }
+        ViewController.gridIsLocked = false
     }
     
     static func checkStartConditions() -> Bool {
         if SolveAlgorithms.startNode == nil {
             ViewController.showAlert(title: "No Start Node Found!", message: "Please add a start node with the draw start node tool.")
+            ViewController.gridIsLocked = false
             return false
         }
         
         else if SolveAlgorithms.endNode == nil {
             ViewController.showAlert(title: "No End Node Found!", message: "Please add an end node with the draw end node tool.")
+            ViewController.gridIsLocked = false
             return false
         }
         
@@ -79,7 +84,7 @@ class SolveAlgorithms {
         
         for row in 0...SolveAlgorithms.nodes.count-1 {
             for column in 0...SolveAlgorithms.nodes[row].count-1 {
-                if SolveAlgorithms.nodes[row][column] === SolveAlgorithms.startNode! {
+                if SolveAlgorithms.nodes[row][column].type == .start {
                     startNodeCoordinates = (row, column)
                 }
             }
@@ -101,9 +106,10 @@ class SolveAlgorithms {
             return
         }
         
-        while(currentNode !== SolveAlgorithms.startNode) {
+        while(!ViewController.threadIsCancelled && currentNode !== SolveAlgorithms.startNode) {
             updateNode(node: currentNode!, color: UIColor.systemTeal)
-            usleep(useconds_t(SolveAlgorithms.speed*5))
+            updateNode(node: currentNode!.parent!, color: UIColor.systemGreen)
+            usleep(useconds_t(SolveAlgorithms.speed * Float(BACKTRACE_DELAY_MULTIPLIER)))
             currentNode = currentNode?.parent
         }
         ViewController.showAlert(title: "A Path Was Found!", message: "It is displayed in teal on the grid.")
@@ -184,20 +190,14 @@ class SolveAlgorithms {
         }
         
         _ = asyncDFSrecursive(currentCoordinates: getStartNodeCoordinates())
-        
         findSolutionPath()
-        
     }
     
     static func asyncDFSrecursive(currentCoordinates: (Int, Int)) -> Bool {
         
-        if ViewController.threadIsCancelled {
-            return true
-        }
-        
         let currentNode = nodeAt(coordinates: currentCoordinates)
         
-        if currentNode.type == .end {
+        if currentNode.type == .end  || ViewController.threadIsCancelled {
             return true
         }
         
@@ -206,53 +206,33 @@ class SolveAlgorithms {
         usleep(useconds_t(SolveAlgorithms.speed))
         
         //go right
-        var right = false
         let rightCoordinates = (currentCoordinates.0, currentCoordinates.1+1)
         if rightCoordinates.1 <= SolveAlgorithms.nodes[rightCoordinates.0].count-1 && nodeIsNotVisitedOrWall(coordinates: rightCoordinates) {
-            nodeAt(coordinates: rightCoordinates).parent = nodeAt(coordinates: currentCoordinates)
-            SolveAlgorithms.updateNode(node: nodeAt(coordinates: rightCoordinates), color: UIColor.systemGreen)
-            usleep(useconds_t(SolveAlgorithms.speed))
-            right = asyncDFSrecursive(currentCoordinates: rightCoordinates)
-            if right || ViewController.threadIsCancelled {
+            if asyncDFSrecursiveHelper(nextCoordinates: rightCoordinates, currentCoordinates: currentCoordinates) {
                 return true
             }
         }
         
         //go up
-        var up = false
         let upCoordinates = (currentCoordinates.0-1, currentCoordinates.1)
         if upCoordinates.0 >= 0 && nodeIsNotVisitedOrWall(coordinates: upCoordinates) {
-            nodeAt(coordinates: upCoordinates).parent = nodeAt(coordinates: currentCoordinates)
-            SolveAlgorithms.updateNode(node: nodeAt(coordinates: upCoordinates), color: UIColor.systemGreen)
-            usleep(useconds_t(SolveAlgorithms.speed))
-            up = asyncDFSrecursive(currentCoordinates: upCoordinates)
-            if up || ViewController.threadIsCancelled {
+            if asyncDFSrecursiveHelper(nextCoordinates: upCoordinates, currentCoordinates: currentCoordinates) {
                 return true
             }
         }
         
         // go left
-        var left = false
         let leftCoordinates = (currentCoordinates.0, currentCoordinates.1-1)
         if leftCoordinates.1 >= 0 && nodeIsNotVisitedOrWall(coordinates: leftCoordinates) {
-            nodeAt(coordinates: leftCoordinates).parent = nodeAt(coordinates: currentCoordinates)
-            SolveAlgorithms.updateNode(node: nodeAt(coordinates: leftCoordinates), color: UIColor.systemGreen)
-            usleep(useconds_t(SolveAlgorithms.speed))
-            left = asyncDFSrecursive(currentCoordinates: leftCoordinates)
-            if left || ViewController.threadIsCancelled {
+            if asyncDFSrecursiveHelper(nextCoordinates: leftCoordinates, currentCoordinates: currentCoordinates) {
                 return true
             }
         }
         
         //go down
-        var down = false
         let downCoordinates = (currentCoordinates.0+1, currentCoordinates.1)
         if downCoordinates.0 <= SolveAlgorithms.nodes.count-1 && nodeIsNotVisitedOrWall(coordinates: downCoordinates) {
-            nodeAt(coordinates: downCoordinates).parent = nodeAt(coordinates: currentCoordinates)
-            SolveAlgorithms.updateNode(node: nodeAt(coordinates: downCoordinates), color: UIColor.systemGreen)
-            usleep(useconds_t(SolveAlgorithms.speed))
-            down = asyncDFSrecursive(currentCoordinates: downCoordinates)
-            if down || ViewController.threadIsCancelled {
+            if asyncDFSrecursiveHelper(nextCoordinates: downCoordinates, currentCoordinates: currentCoordinates) {
                 return true
             }
         }
@@ -260,4 +240,17 @@ class SolveAlgorithms {
         return false
     }
     
+    static func asyncDFSrecursiveHelper(nextCoordinates: (Int, Int), currentCoordinates: (Int, Int)) -> Bool {
+        var isDone = false
+        nodeAt(coordinates: nextCoordinates).parent = nodeAt(coordinates: currentCoordinates)
+        SolveAlgorithms.updateNode(node: nodeAt(coordinates: nextCoordinates), color: UIColor.systemGreen)
+        usleep(useconds_t(SolveAlgorithms.speed))
+        isDone = asyncDFSrecursive(currentCoordinates: nextCoordinates)
+        
+        if isDone {
+            return true
+        }
+            
+        return false
+    }
 }
