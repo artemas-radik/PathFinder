@@ -67,6 +67,18 @@ class SolveAlgorithms {
         return true
     }
     
+    static func updateNode(node: Node, color: UIColor) {
+        DispatchQueue.main.async {
+            if node.type != .end && node.type != .start && !ViewController.threadIsCancelled {
+                node.view.backgroundColor = color
+            }
+            
+            else if ViewController.threadIsCancelled {
+                SolveAlgorithms.reset()
+            }
+        }
+    }
+    
     //MARK: asyncBFS
     @objc static func asyncBFS() {
         
@@ -88,6 +100,7 @@ class SolveAlgorithms {
         queue.enQueue(item: startNodeCoordinates)
         
         while queue.size > 0 {
+            
             if ViewController.threadIsCancelled {
                 SolveAlgorithms.reset()
                 return
@@ -105,99 +118,49 @@ class SolveAlgorithms {
             }
             
             currentNode.isVisited = true
-            
-            DispatchQueue.main.async {
-                if currentNode.type != .end && currentNode.type != .start && !ViewController.threadIsCancelled {
-                    currentNode.view.backgroundColor = UIColor.systemYellow
-                }
-                    
-                else if ViewController.threadIsCancelled {
-                    SolveAlgorithms.reset()
-                    return
-                }
-            }
+            updateNode(node: currentNode, color: UIColor.systemYellow)
             
             //go right
             let rightCoordinates = (currentCoordinates.0!, currentCoordinates.1!+1)
             if rightCoordinates.1 <= SolveAlgorithms.nodes[rightCoordinates.0].count-1 && !SolveAlgorithms.nodes[rightCoordinates.0][rightCoordinates.1].isVisited && SolveAlgorithms.nodes[rightCoordinates.0][rightCoordinates.1].type != .wall {
-                queue.enQueue(item: rightCoordinates)
                 
+                queue.enQueue(item: rightCoordinates)
                 let rightNode = SolveAlgorithms.nodes[rightCoordinates.0][rightCoordinates.1]
                 rightNode.parent = currentNode
-                
-                DispatchQueue.main.async {
-                    if rightNode.type != .end && rightNode.type != .start && !ViewController.threadIsCancelled {
-                        rightNode.view.backgroundColor = UIColor.systemGreen
-                    }
-                    
-                    else if ViewController.threadIsCancelled {
-                        SolveAlgorithms.reset()
-                        return
-                    }
-                }
+                updateNode(node: rightNode, color: UIColor.systemGreen)
                 usleep(useconds_t(SolveAlgorithms.speed))
             }
             
             //go up
             let upCoordinates = (currentCoordinates.0!-1, currentCoordinates.1!)
             if upCoordinates.0 >= 0 && !SolveAlgorithms.nodes[upCoordinates.0][upCoordinates.1].isVisited && SolveAlgorithms.nodes[upCoordinates.0][upCoordinates.1].type != .wall {
-                queue.enQueue(item: upCoordinates)
                 
+                queue.enQueue(item: upCoordinates)
                 let upNode = SolveAlgorithms.nodes[upCoordinates.0][upCoordinates.1]
                 upNode.parent = currentNode
-                
-                DispatchQueue.main.async {
-                    if upNode.type != .end && upNode.type != .start && !ViewController.threadIsCancelled {
-                        upNode.view.backgroundColor = UIColor.systemGreen
-                    }
-                    
-                    else if ViewController.threadIsCancelled {
-                        SolveAlgorithms.reset()
-                        return
-                    }
-                }
+                updateNode(node: upNode, color: UIColor.systemGreen)
                 usleep(useconds_t(SolveAlgorithms.speed))
             }
             
             // go left
             let leftCoordinates = (currentCoordinates.0!, currentCoordinates.1!-1)
             if leftCoordinates.1 >= 0 && !SolveAlgorithms.nodes[leftCoordinates.0][leftCoordinates.1].isVisited && SolveAlgorithms.nodes[leftCoordinates.0][leftCoordinates.1].type != .wall {
-                queue.enQueue(item: leftCoordinates)
                 
+                queue.enQueue(item: leftCoordinates)
                 let leftNode = SolveAlgorithms.nodes[leftCoordinates.0][leftCoordinates.1]
                 leftNode.parent = currentNode
-                
-                DispatchQueue.main.async {
-                    if leftNode.type != .end && leftNode.type != .start && !ViewController.threadIsCancelled {
-                        leftNode.view.backgroundColor = UIColor.systemGreen
-                    }
-                    
-                    else if ViewController.threadIsCancelled {
-                        SolveAlgorithms.reset()
-                        return
-                    }
-                }
+                updateNode(node: leftNode, color: UIColor.systemGreen)
                 usleep(useconds_t(SolveAlgorithms.speed))
             }
             
             //go down
             let downCoordinates = (currentCoordinates.0!+1, currentCoordinates.1!)
             if downCoordinates.0 <= SolveAlgorithms.nodes.count-1 && !SolveAlgorithms.nodes[downCoordinates.0][downCoordinates.1].isVisited && SolveAlgorithms.nodes[downCoordinates.0][downCoordinates.1].type != .wall {
+                
                 queue.enQueue(item: downCoordinates)
-
                 let downNode = SolveAlgorithms.nodes[downCoordinates.0][downCoordinates.1]
                 downNode.parent = currentNode
-                
-                DispatchQueue.main.async {
-                    if downNode.type != .end && downNode.type != .start && !ViewController.threadIsCancelled {
-                        downNode.view.backgroundColor = UIColor.systemGreen
-                    }
-                    
-                    else if ViewController.threadIsCancelled {
-                        SolveAlgorithms.reset()
-                        return
-                    }
-                }
+                updateNode(node: downNode, color: UIColor.systemGreen)
                 usleep(useconds_t(SolveAlgorithms.speed))
             }
         }
@@ -210,17 +173,8 @@ class SolveAlgorithms {
         }
         
         while(currentNode !== SolveAlgorithms.startNode) {
-            DispatchQueue.main.async {
-                if currentNode!.type != .end && currentNode!.type != .start && !ViewController.threadIsCancelled {
-                    currentNode!.view.backgroundColor = UIColor.systemTeal
-                }
-                
-                else if ViewController.threadIsCancelled {
-                    SolveAlgorithms.reset()
-                    return
-                }
-            }
-            usleep(useconds_t(SolveAlgorithms.speed*3))
+            updateNode(node: currentNode!, color: UIColor.systemTeal)
+            usleep(useconds_t(SolveAlgorithms.speed*5))
             currentNode = currentNode?.parent
         }
         showAlert(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.")
