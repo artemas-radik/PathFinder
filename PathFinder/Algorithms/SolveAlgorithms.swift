@@ -89,6 +89,11 @@ class SolveAlgorithms {
     }
     
     static func findSolutionPath() {
+        
+        if ViewController.threadIsCancelled {
+            return
+        }
+        
         var currentNode = SolveAlgorithms.endNode!.parent
         
         if currentNode == nil {
@@ -186,6 +191,10 @@ class SolveAlgorithms {
     
     static func asyncDFSrecursive(currentCoordinates: (Int, Int)) -> Bool {
         
+        if ViewController.threadIsCancelled {
+            return true
+        }
+        
         let currentNode = nodeAt(coordinates: currentCoordinates)
         
         if currentNode.type == .end {
@@ -204,7 +213,7 @@ class SolveAlgorithms {
             SolveAlgorithms.updateNode(node: nodeAt(coordinates: rightCoordinates), color: UIColor.systemGreen)
             usleep(useconds_t(SolveAlgorithms.speed))
             right = asyncDFSrecursive(currentCoordinates: rightCoordinates)
-            if right {
+            if right || ViewController.threadIsCancelled {
                 return true
             }
         }
@@ -217,7 +226,7 @@ class SolveAlgorithms {
             SolveAlgorithms.updateNode(node: nodeAt(coordinates: upCoordinates), color: UIColor.systemGreen)
             usleep(useconds_t(SolveAlgorithms.speed))
             up = asyncDFSrecursive(currentCoordinates: upCoordinates)
-            if up {
+            if up || ViewController.threadIsCancelled {
                 return true
             }
         }
@@ -230,7 +239,7 @@ class SolveAlgorithms {
             SolveAlgorithms.updateNode(node: nodeAt(coordinates: leftCoordinates), color: UIColor.systemGreen)
             usleep(useconds_t(SolveAlgorithms.speed))
             left = asyncDFSrecursive(currentCoordinates: leftCoordinates)
-            if left {
+            if left || ViewController.threadIsCancelled {
                 return true
             }
         }
@@ -243,7 +252,7 @@ class SolveAlgorithms {
             SolveAlgorithms.updateNode(node: nodeAt(coordinates: downCoordinates), color: UIColor.systemGreen)
             usleep(useconds_t(SolveAlgorithms.speed))
             down = asyncDFSrecursive(currentCoordinates: downCoordinates)
-            if down {
+            if down || ViewController.threadIsCancelled {
                 return true
             }
         }
