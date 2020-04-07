@@ -79,11 +79,19 @@ class SolveAlgorithms {
         }
     }
     
+    static func nodeAt(coordinates: (Int, Int)) -> Node {
+        return SolveAlgorithms.nodes[coordinates.0][coordinates.1]
+    }
+    
+    static func nodeIsNotVisitedOrWall(coordinates: (Int, Int)) -> Bool {
+        return !nodeAt(coordinates: coordinates).isVisited && nodeAt(coordinates: coordinates).type != .wall
+    }
+    
     //MARK: asyncBFS
     @objc static func asyncBFS() {
         
         if !checkStartConditions() {
-            return
+            return 
         }
         
         var startNodeCoordinates: (Int?, Int?) = (nil, nil)
@@ -123,45 +131,25 @@ class SolveAlgorithms {
             //go right
             let rightCoordinates = (currentCoordinates.0!, currentCoordinates.1!+1)
             if rightCoordinates.1 <= SolveAlgorithms.nodes[rightCoordinates.0].count-1 && !SolveAlgorithms.nodes[rightCoordinates.0][rightCoordinates.1].isVisited && SolveAlgorithms.nodes[rightCoordinates.0][rightCoordinates.1].type != .wall {
-                
-                queue.enQueue(item: rightCoordinates)
-                let rightNode = SolveAlgorithms.nodes[rightCoordinates.0][rightCoordinates.1]
-                rightNode.parent = currentNode
-                updateNode(node: rightNode, color: UIColor.systemGreen)
-                usleep(useconds_t(SolveAlgorithms.speed))
+                SolveAlgorithms.asyncBFShelper(queue: queue, coordinates: rightCoordinates, currentNode: currentNode)
             }
             
             //go up
             let upCoordinates = (currentCoordinates.0!-1, currentCoordinates.1!)
             if upCoordinates.0 >= 0 && !SolveAlgorithms.nodes[upCoordinates.0][upCoordinates.1].isVisited && SolveAlgorithms.nodes[upCoordinates.0][upCoordinates.1].type != .wall {
-                
-                queue.enQueue(item: upCoordinates)
-                let upNode = SolveAlgorithms.nodes[upCoordinates.0][upCoordinates.1]
-                upNode.parent = currentNode
-                updateNode(node: upNode, color: UIColor.systemGreen)
-                usleep(useconds_t(SolveAlgorithms.speed))
+                SolveAlgorithms.asyncBFShelper(queue: queue, coordinates: upCoordinates, currentNode: currentNode)
             }
             
             // go left
             let leftCoordinates = (currentCoordinates.0!, currentCoordinates.1!-1)
             if leftCoordinates.1 >= 0 && !SolveAlgorithms.nodes[leftCoordinates.0][leftCoordinates.1].isVisited && SolveAlgorithms.nodes[leftCoordinates.0][leftCoordinates.1].type != .wall {
-                
-                queue.enQueue(item: leftCoordinates)
-                let leftNode = SolveAlgorithms.nodes[leftCoordinates.0][leftCoordinates.1]
-                leftNode.parent = currentNode
-                updateNode(node: leftNode, color: UIColor.systemGreen)
-                usleep(useconds_t(SolveAlgorithms.speed))
+                SolveAlgorithms.asyncBFShelper(queue: queue, coordinates: leftCoordinates, currentNode: currentNode)
             }
             
             //go down
             let downCoordinates = (currentCoordinates.0!+1, currentCoordinates.1!)
             if downCoordinates.0 <= SolveAlgorithms.nodes.count-1 && !SolveAlgorithms.nodes[downCoordinates.0][downCoordinates.1].isVisited && SolveAlgorithms.nodes[downCoordinates.0][downCoordinates.1].type != .wall {
-                
-                queue.enQueue(item: downCoordinates)
-                let downNode = SolveAlgorithms.nodes[downCoordinates.0][downCoordinates.1]
-                downNode.parent = currentNode
-                updateNode(node: downNode, color: UIColor.systemGreen)
-                usleep(useconds_t(SolveAlgorithms.speed))
+                SolveAlgorithms.asyncBFShelper(queue: queue, coordinates: downCoordinates, currentNode: currentNode)
             }
         }
         
@@ -179,4 +167,13 @@ class SolveAlgorithms {
         }
         showAlert(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.")
     }
+    
+    static func asyncBFShelper(queue: Queue<(Int?, Int?)>, coordinates: (Int, Int), currentNode: Node) {
+        queue.enQueue(item: coordinates)
+        let nextNode = nodeAt(coordinates: coordinates)
+        nextNode.parent = currentNode
+        SolveAlgorithms.updateNode(node: nextNode, color: UIColor.systemGreen)
+        usleep(useconds_t(SolveAlgorithms.speed))
+    }
+    
 }
