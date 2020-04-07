@@ -96,7 +96,6 @@ class ViewController: UIViewController {
                             SolveAlgorithms.endNode?.view.backgroundColor = UIColor.systemBlue
                             SolveAlgorithms.endNode?.type = .end
                     }
-                    
                 }
             }
         }
@@ -242,7 +241,7 @@ class ViewController: UIViewController {
                 SolveAlgorithms.reset()
             case "Find Path":
                 ViewController.threadIsCancelled = false
-                ViewController.thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncBFS), object: nil)
+                ViewController.thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncDFS), object: nil)
                 ViewController.thread!.start()
             default:
                 break
