@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+let SOLVE_ANIMATION_DURATION = 0.6
+let SOLVE_ANIMATION_DELAY: TimeInterval = 0
+let SOLVE_ANIMATION_SPRING_WITH_DAMPING: CGFloat = 0.5
+let SOLVE_ANIMATION_INITIAL_SPRING_VELOCITY: CGFloat = 6
+let SOLVE_ANIMATION_X_Y_SCALE: CGFloat = 1.6
+
 enum SolveAlgorithm {
     case DFS
     case BFS
@@ -63,13 +69,13 @@ class SolveAlgorithms {
         DispatchQueue.main.async {
             if node.type != .end && node.type != .start && !ViewController.threadIsCancelled {
                 
-                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 6, options: .allowUserInteraction, animations: {
-                    node.view.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
+                UIView.animate(withDuration: SOLVE_ANIMATION_DURATION, delay: SOLVE_ANIMATION_DELAY, usingSpringWithDamping: SOLVE_ANIMATION_SPRING_WITH_DAMPING, initialSpringVelocity: SOLVE_ANIMATION_INITIAL_SPRING_VELOCITY, options: .allowUserInteraction, animations: {
+                    node.view.transform = CGAffineTransform(scaleX: SOLVE_ANIMATION_X_Y_SCALE, y: SOLVE_ANIMATION_X_Y_SCALE)
                 }, completion: nil)
                 
                 node.view.backgroundColor = color
                 
-                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 6, options: .allowUserInteraction, animations: {
+                UIView.animate(withDuration: SOLVE_ANIMATION_DURATION, delay: SOLVE_ANIMATION_DELAY, usingSpringWithDamping: SOLVE_ANIMATION_SPRING_WITH_DAMPING, initialSpringVelocity: SOLVE_ANIMATION_INITIAL_SPRING_VELOCITY, options: .allowUserInteraction, animations: {
                     node.view.transform = CGAffineTransform.identity
                 }, completion: nil)
                 

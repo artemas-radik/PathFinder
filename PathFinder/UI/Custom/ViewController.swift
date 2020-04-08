@@ -26,6 +26,11 @@ class ViewController: UIViewController {
     let CONTROL_BUTTON_ANIMATION_DURATION = 0.2
     let SPEED_SLIDER_MIN: Float = 5000
     let SPEED_SLIDER_MAX: Float = 50000
+    let NODE_ANIMATION_DURATION = 0.5
+    let NODE_ANIMATION_DELAY: TimeInterval = 0
+    let NODE_ANIMATION_SPRING_WITH_DAMPING: CGFloat = 0.5
+    let NODE_ANIMATION_INITIAL_SPRING_VELOCITY: CGFloat = 6
+    let NODE_ANIMATION_X_Y_SCALE: CGFloat = 1.3
     
     static var viewController: UIViewController? = nil
     static var verticalGridStack: UIStackView? = nil
@@ -83,8 +88,8 @@ class ViewController: UIViewController {
                     
 //                    node.view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
                     
-                    UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 6, options: .allowUserInteraction, animations: {
-                        node.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                    UIView.animate(withDuration: NODE_ANIMATION_DURATION, delay: NODE_ANIMATION_DELAY, usingSpringWithDamping: NODE_ANIMATION_SPRING_WITH_DAMPING, initialSpringVelocity: NODE_ANIMATION_INITIAL_SPRING_VELOCITY, options: .allowUserInteraction, animations: {
+                        node.view.transform = CGAffineTransform(scaleX: self.NODE_ANIMATION_X_Y_SCALE, y: self.NODE_ANIMATION_X_Y_SCALE)
                     }, completion: nil)
                     
                     switch ViewController.drawtype {
@@ -124,7 +129,7 @@ class ViewController: UIViewController {
                             SolveAlgorithms.endNode?.type = .end
                     }
                     
-                    UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 6, options: .allowUserInteraction, animations: {
+                    UIView.animate(withDuration: NODE_ANIMATION_DURATION, delay: NODE_ANIMATION_DELAY, usingSpringWithDamping: NODE_ANIMATION_SPRING_WITH_DAMPING, initialSpringVelocity: NODE_ANIMATION_INITIAL_SPRING_VELOCITY, options: .allowUserInteraction, animations: {
                         node.view.transform = CGAffineTransform.identity
                     }, completion: nil)
                     
