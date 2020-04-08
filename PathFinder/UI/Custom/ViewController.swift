@@ -234,7 +234,7 @@ class ViewController: UIViewController {
         let controlStack = initializeCustomStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
         bigStack.addArrangedSubview(controlStack)
         
-        controlStack.addArrangedSubview(initializeCustomLabel(title: "FIND PATH, STOP, AND RESET"))
+        controlStack.addArrangedSubview(initializeCustomLabel(title: "FIND PATH AND RESET"))
         
         let controlButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         controlStack.addArrangedSubview(controlButtonStack)
