@@ -22,7 +22,7 @@ enum SolveAlgorithm {
 
 class SolveAlgorithms {
  
-    static let BACKTRACE_DELAY_MULTIPLIER = 5
+    static let BACKTRACE_DELAY_MULTIPLIER = 3
     
     static var nodes: [[Node]] = []
     static var startNode: Node? = nil
