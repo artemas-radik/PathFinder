@@ -180,7 +180,7 @@ class ViewController: UIViewController {
             view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: bigStack.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
             view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: bigStack.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
             view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: bigStack.bottomAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
-            NSLayoutConstraint(item: bigStack, attribute: .top, relatedBy: .equal, toItem: ViewController.verticalGridStack, attribute: .bottom, multiplier: 1, constant: STANDARD_CONSTRAINT_CONSTANT/2)
+            NSLayoutConstraint(item: bigStack, attribute: .top, relatedBy: .equal, toItem: ViewController.verticalGridStack, attribute: .bottom, multiplier: 1, constant: STANDARD_CONSTRAINT_CONSTANT/2), NSLayoutConstraint(item: bigStack, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: ViewController.viewController?.view, attribute: .height, multiplier: 0.4, constant: 0)
         ]
         bigStack.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bigStack)
@@ -339,10 +339,10 @@ class ViewController: UIViewController {
         ViewController.verticalGridStack = initializeCustomStack(axis: .vertical, spacing: GRID_GAP_SIZE)
         
         let gridStackConstraints: [NSLayoutConstraint] = [
-            view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: ViewController.verticalGridStack!.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
-            view.safeAreaLayoutGuide.leadingAnchor.constraint(equalTo: ViewController.verticalGridStack!.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.trailingAnchor.constraint(greaterThanOrEqualTo: ViewController.verticalGridStack!.trailingAnchor, constant: STANDARD_CONSTRAINT_CONSTANT),
+            view.safeAreaLayoutGuide.leadingAnchor.constraint(lessThanOrEqualTo: ViewController.verticalGridStack!.leadingAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
             view.safeAreaLayoutGuide.topAnchor.constraint(equalTo: ViewController.verticalGridStack!.topAnchor, constant: -1 * STANDARD_CONSTRAINT_CONSTANT),
-            ViewController.verticalGridStack!.heightAnchor.constraint(equalTo: ViewController.verticalGridStack!.widthAnchor)
+            ViewController.verticalGridStack!.heightAnchor.constraint(equalTo: ViewController.verticalGridStack!.widthAnchor), ViewController.verticalGridStack!.centerXAnchor.constraint(equalTo: ViewController.viewController!.view.centerXAnchor)
         ]
         
         ViewController.verticalGridStack!.translatesAutoresizingMaskIntoConstraints = false
