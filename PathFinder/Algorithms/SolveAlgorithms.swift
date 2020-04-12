@@ -69,6 +69,12 @@ class SolveAlgorithms {
         DispatchQueue.main.async {
             if node.type != .end && node.type != .start && !ViewController.threadIsCancelled {
                 
+                
+                if color == UIColor.systemGreen || color == UIColor.systemTeal {
+                    let generator = UISelectionFeedbackGenerator()
+                    generator.selectionChanged()
+                }
+                
                 UIView.animate(withDuration: SOLVE_ANIMATION_DURATION, delay: SOLVE_ANIMATION_DELAY, usingSpringWithDamping: SOLVE_ANIMATION_SPRING_WITH_DAMPING, initialSpringVelocity: SOLVE_ANIMATION_INITIAL_SPRING_VELOCITY, options: .allowUserInteraction, animations: {
                     node.view.transform = CGAffineTransform(scaleX: SOLVE_ANIMATION_X_Y_SCALE, y: SOLVE_ANIMATION_X_Y_SCALE)
                 }, completion: nil)

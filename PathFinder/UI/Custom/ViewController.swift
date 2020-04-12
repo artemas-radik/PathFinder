@@ -76,6 +76,8 @@ class ViewController: UIViewController {
         respondToTouch(touch: touch)
     }
     
+    var mostRecentNode: Node? = nil
+    
     func respondToTouch(touch: UITouch) {
         
         if ViewController.gridIsLocked {
@@ -87,6 +89,12 @@ class ViewController: UIViewController {
                 if node.view.frame.contains(touch.location(in: node.view.superview)) {
                     
 //                    node.view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                    
+                    if node !== mostRecentNode {
+                        let generator = UIImpactFeedbackGenerator(style: .medium)
+                        generator.impactOccurred()
+                        mostRecentNode = node
+                    }
                     
                     UIView.animate(withDuration: NODE_ANIMATION_DURATION, delay: NODE_ANIMATION_DELAY, usingSpringWithDamping: NODE_ANIMATION_SPRING_WITH_DAMPING, initialSpringVelocity: NODE_ANIMATION_INITIAL_SPRING_VELOCITY, options: .allowUserInteraction, animations: {
                         node.view.transform = CGAffineTransform(scaleX: self.NODE_ANIMATION_X_Y_SCALE, y: self.NODE_ANIMATION_X_Y_SCALE)
@@ -116,12 +124,22 @@ class ViewController: UIViewController {
                             node.view.backgroundColor = UIColor.systemFill
                             node.type = .space
                         case .start:
+                            
+                            if node === SolveAlgorithms.endNode {
+                                SolveAlgorithms.endNode = nil
+                            }
+                            
                             SolveAlgorithms.startNode?.view.backgroundColor = UIColor.systemFill
                             SolveAlgorithms.startNode?.type = .space
                             SolveAlgorithms.startNode = node
                             SolveAlgorithms.startNode?.view.backgroundColor = UIColor.systemIndigo
                             SolveAlgorithms.startNode?.type = .start
                         case .end:
+                            
+                            if node === SolveAlgorithms.startNode {
+                                SolveAlgorithms.startNode = nil
+                            }
+                            
                             SolveAlgorithms.endNode?.view.backgroundColor = UIColor.systemFill
                             SolveAlgorithms.endNode?.type = .space
                             SolveAlgorithms.endNode = node
@@ -336,6 +354,8 @@ class ViewController: UIViewController {
     }
     
     @objc func speedSliderDidChange(sender: UISlider!) {
+        let generator = UISelectionFeedbackGenerator()
+        generator.selectionChanged()
         SolveAlgorithms.speed = sender.maximumValue - sender.value + sender.minimumValue
     }
         

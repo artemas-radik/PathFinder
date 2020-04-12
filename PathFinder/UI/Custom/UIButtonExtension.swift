@@ -20,6 +20,9 @@ extension UIButton {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.impactOccurred()
+        
         UIView.animate(withDuration: BUTTON_ANIMATION_DURATION, delay: BUTTON_ANIMATION_DELAY, usingSpringWithDamping: BUTTON_ANIMATION_SPRING_WITH_DAMPING, initialSpringVelocity: BUTTON_ANIMATION_INITIAL_SPRING_VELOCITY, options: .allowUserInteraction, animations: {
             self.transform = CGAffineTransform(scaleX: BUTTON_ANIMATION_X_Y_SCALE, y: BUTTON_ANIMATION_X_Y_SCALE)
         }, completion: nil)
