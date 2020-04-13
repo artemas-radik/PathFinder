@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     static var drawtype: Node.NodeType = .wall
     static var gridIsLocked = false
     
-    static var threadIsCancelled = false
+    static var threadIsCancelled = true
     
     static var solveAlgorithm: SolveAlgorithm = .BFS
     
@@ -86,6 +86,7 @@ class ViewController: UIViewController {
     func respondToTouch(touch: UITouch) {
         
         if ViewController.gridIsLocked {
+            ViewController.showAlert(title: "Grid Is Locked!", message: "The grid is locked. You cannot draw while the grid is locked. If you wish to see a different algorithm in action on the same grid, just reselect your algorithm.", handler: nil)
             return
         }
         
@@ -269,9 +270,6 @@ class ViewController: UIViewController {
     //MARK: Control Button Handlers
     @objc func controlButtonTouchUpInside(sender: UIButton!) {
         
-        if ViewController.gridIsLocked && (sender.titleLabel?.text == "Depth-First-Search" || sender.titleLabel?.text == "Breadth-First-Search") {
-            return
-        }
         
         for button in (sender.superview as! UIStackView).arrangedSubviews {
             if button == sender {
@@ -292,14 +290,27 @@ class ViewController: UIViewController {
                 ViewController.drawtype = .end
             case "Depth-First-Search":
                 ViewController.solveAlgorithm = .DFS
+                
+                if ViewController.gridIsLocked {
+                    SolveAlgorithms.revert()
+                    ViewController.gridIsLocked = false
+                }
+            
             case "Breadth-First-Search":
                 ViewController.solveAlgorithm = .BFS
+                
+                if ViewController.gridIsLocked {
+                    SolveAlgorithms.revert()
+                    ViewController.gridIsLocked = false
+                }
+            
             case "Reset":
                 SolveAlgorithms.reset()
                 return
             case "Find Path":
                 
                 if ViewController.gridIsLocked {
+                    ViewController.showAlert(title: "Grid Is Locked!", message: "The grid is locked. You cannot find a new path while the grid is locked. If you wish to see a different algorithm in action on the same grid, just reselect your algorithm.", handler: nil)
                     return
                 }
                 

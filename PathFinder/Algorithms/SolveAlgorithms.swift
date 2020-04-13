@@ -49,6 +49,27 @@ class SolveAlgorithms {
             }
         }
         ViewController.gridIsLocked = false
+        ViewController.threadIsCancelled = true
+    }
+    
+    static func revert() {
+        ViewController.threadIsCancelled = true
+        for nodeRow in SolveAlgorithms.nodes {
+            for node in nodeRow {
+                node.isVisited = false
+                node.parent = nil
+                
+                DispatchQueue.main.async {
+                    
+                    if node.type != .wall && node.type != .end && node.type != .start {
+                        node.view.backgroundColor = UIColor.systemFill
+                    }
+                    
+                }
+                
+            }
+        }
+        ViewController.threadIsCancelled = true
     }
     
     static func checkStartConditions() -> Bool {
@@ -90,7 +111,7 @@ class SolveAlgorithms {
             }
             
             else if ViewController.threadIsCancelled {
-                SolveAlgorithms.reset()
+                SolveAlgorithms.revert()
             }
         }
     }
@@ -170,7 +191,7 @@ class SolveAlgorithms {
         while queue.size > 0 {
             
             if ViewController.threadIsCancelled {
-                SolveAlgorithms.reset()
+                SolveAlgorithms.revert()
                 return
             }
             
