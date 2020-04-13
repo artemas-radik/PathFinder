@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_5" orientation="portrait" appearance="dark"/>
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="LexendDeca-Regular.ttf">
+            <string>LexendDeca-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -17,10 +22,216 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <segue destination="gHv-cb-xfS" kind="show" id="VB0-CC-QN1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-57.971014492753625" y="129.91071428571428"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="uBX-1j-PEh">
+            <objects>
+                <viewController id="gHv-cb-xfS" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VLY-Ww-O4M">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="aeq-ef-itX">
+                                <rect key="frame" x="20" y="20" width="374" height="240"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Welcome To PathFinder!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6k-rg-J7S">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="125"/>
+                                        <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="50"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PathFinder is an algorithm visualizer for the Breadth First Search and Depth First Search pathfinding algorithms." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0m3-yg-Z8z">
+                                        <rect key="frame" x="0.0" y="115" width="374" height="125"/>
+                                        <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hFv-uh-D4Y">
+                                <rect key="frame" x="20" y="260" width="374" height="528"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zPx-HC-Uo1">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="88"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHK-BF-4lX">
+                                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="88"/>
+                                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="50"/>
+                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Draw walls to avoid, and make sure to add a start and end node!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8W-1r-7oG">
+                                                <rect key="frame" x="93.666666666666657" y="0.0" width="280.33333333333337" height="88"/>
+                                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="j8W-1r-7oG" firstAttribute="top" secondItem="zPx-HC-Uo1" secondAttribute="top" id="2UQ-Qa-beo"/>
+                                            <constraint firstItem="j8W-1r-7oG" firstAttribute="leading" secondItem="zHK-BF-4lX" secondAttribute="trailing" id="GbQ-JP-DZc"/>
+                                            <constraint firstItem="zHK-BF-4lX" firstAttribute="top" secondItem="zPx-HC-Uo1" secondAttribute="top" id="Hu6-LD-9JU"/>
+                                            <constraint firstItem="zHK-BF-4lX" firstAttribute="leading" secondItem="zPx-HC-Uo1" secondAttribute="leading" id="ZDV-Fr-Nln"/>
+                                            <constraint firstAttribute="bottom" secondItem="j8W-1r-7oG" secondAttribute="bottom" id="cvZ-9m-yEK"/>
+                                            <constraint firstAttribute="trailing" secondItem="j8W-1r-7oG" secondAttribute="trailing" id="ieb-iw-Ccs"/>
+                                            <constraint firstAttribute="bottom" secondItem="zHK-BF-4lX" secondAttribute="bottom" id="lUS-ty-ibF"/>
+                                            <constraint firstItem="zHK-BF-4lX" firstAttribute="width" secondItem="zPx-HC-Uo1" secondAttribute="width" multiplier="0.25" id="wEp-wX-YwF"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lR-jx-8SW">
+                                        <rect key="frame" x="0.0" y="88" width="374" height="88"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5MM-SZ-3KD">
+                                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="88"/>
+                                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="50"/>
+                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Choose which algorithm you'd like to see find a path." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8GT-BR-gI5">
+                                                <rect key="frame" x="93.666666666666657" y="0.0" width="280.33333333333337" height="88"/>
+                                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="5MM-SZ-3KD" firstAttribute="width" secondItem="6lR-jx-8SW" secondAttribute="width" multiplier="0.25" id="BNZ-aV-yXJ"/>
+                                            <constraint firstItem="5MM-SZ-3KD" firstAttribute="leading" secondItem="6lR-jx-8SW" secondAttribute="leading" id="TSo-vX-tdY"/>
+                                            <constraint firstItem="5MM-SZ-3KD" firstAttribute="top" secondItem="6lR-jx-8SW" secondAttribute="top" id="adj-m6-hJ4"/>
+                                            <constraint firstItem="8GT-BR-gI5" firstAttribute="top" secondItem="6lR-jx-8SW" secondAttribute="top" id="eRg-Ov-iDW"/>
+                                            <constraint firstItem="8GT-BR-gI5" firstAttribute="leading" secondItem="5MM-SZ-3KD" secondAttribute="trailing" id="eeC-Bh-qRj"/>
+                                            <constraint firstAttribute="bottom" secondItem="8GT-BR-gI5" secondAttribute="bottom" id="hYc-ZC-Kbd"/>
+                                            <constraint firstAttribute="trailing" secondItem="8GT-BR-gI5" secondAttribute="trailing" id="hfU-XW-6PB"/>
+                                            <constraint firstAttribute="bottom" secondItem="5MM-SZ-3KD" secondAttribute="bottom" id="i0F-eY-4Sc"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nq2-j6-9aW">
+                                        <rect key="frame" x="0.0" y="176" width="374" height="88"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAc-2R-HxA">
+                                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="88"/>
+                                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="50"/>
+                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Control how fast the algorithm finds the path." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YM8-5k-RbM">
+                                                <rect key="frame" x="93.666666666666657" y="0.0" width="280.33333333333337" height="88"/>
+                                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="xAc-2R-HxA" firstAttribute="leading" secondItem="Nq2-j6-9aW" secondAttribute="leading" id="9fr-nG-Urn"/>
+                                            <constraint firstItem="xAc-2R-HxA" firstAttribute="width" secondItem="Nq2-j6-9aW" secondAttribute="width" multiplier="0.25" id="JY3-kT-zKA"/>
+                                            <constraint firstItem="YM8-5k-RbM" firstAttribute="leading" secondItem="xAc-2R-HxA" secondAttribute="trailing" id="Lgy-zS-EmP"/>
+                                            <constraint firstAttribute="bottom" secondItem="xAc-2R-HxA" secondAttribute="bottom" id="NRp-Xo-rRZ"/>
+                                            <constraint firstItem="YM8-5k-RbM" firstAttribute="top" secondItem="Nq2-j6-9aW" secondAttribute="top" id="R1w-nk-JLq"/>
+                                            <constraint firstAttribute="trailing" secondItem="YM8-5k-RbM" secondAttribute="trailing" id="UbO-Fs-jSU"/>
+                                            <constraint firstItem="xAc-2R-HxA" firstAttribute="top" secondItem="Nq2-j6-9aW" secondAttribute="top" id="oAk-wv-1jq"/>
+                                            <constraint firstAttribute="bottom" secondItem="YM8-5k-RbM" secondAttribute="bottom" id="r2a-ck-zAy"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgc-kh-z4Y">
+                                        <rect key="frame" x="0.0" y="264" width="374" height="88"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTi-dI-Az6">
+                                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="88"/>
+                                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="50"/>
+                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Start the pathfinding process, and then use the reset button when you are ready to reset." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6m-0B-pOi">
+                                                <rect key="frame" x="93.666666666666657" y="0.0" width="280.33333333333337" height="88"/>
+                                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="t6m-0B-pOi" secondAttribute="trailing" id="AjQ-R9-c2s"/>
+                                            <constraint firstItem="t6m-0B-pOi" firstAttribute="top" secondItem="Cgc-kh-z4Y" secondAttribute="top" id="Djo-G3-pCD"/>
+                                            <constraint firstAttribute="bottom" secondItem="yTi-dI-Az6" secondAttribute="bottom" id="EWm-fG-u32"/>
+                                            <constraint firstItem="yTi-dI-Az6" firstAttribute="width" secondItem="Cgc-kh-z4Y" secondAttribute="width" multiplier="0.25" id="eGs-VT-cTh"/>
+                                            <constraint firstItem="yTi-dI-Az6" firstAttribute="top" secondItem="Cgc-kh-z4Y" secondAttribute="top" id="k8z-R1-RuI"/>
+                                            <constraint firstItem="t6m-0B-pOi" firstAttribute="leading" secondItem="yTi-dI-Az6" secondAttribute="trailing" id="pCI-Hp-Dq6"/>
+                                            <constraint firstAttribute="bottom" secondItem="t6m-0B-pOi" secondAttribute="bottom" id="r8n-am-Ta0"/>
+                                            <constraint firstItem="yTi-dI-Az6" firstAttribute="leading" secondItem="Cgc-kh-z4Y" secondAttribute="leading" id="vyg-vh-6tN"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeB-bx-62w">
+                                        <rect key="frame" x="0.0" y="352" width="374" height="88"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bJ-Vg-oGS">
+                                                <rect key="frame" x="0.0" y="0.0" width="93.666666666666671" height="88"/>
+                                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="50"/>
+                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Enjoy :)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sor-dr-iIm">
+                                                <rect key="frame" x="93.666666666666657" y="0.0" width="280.33333333333337" height="88"/>
+                                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="9bJ-Vg-oGS" firstAttribute="width" secondItem="DeB-bx-62w" secondAttribute="width" multiplier="0.25" id="2kH-Ob-yBk"/>
+                                            <constraint firstAttribute="bottom" secondItem="9bJ-Vg-oGS" secondAttribute="bottom" id="3Qx-6K-4h7"/>
+                                            <constraint firstItem="9bJ-Vg-oGS" firstAttribute="top" secondItem="DeB-bx-62w" secondAttribute="top" id="Cjw-P3-NZa"/>
+                                            <constraint firstAttribute="trailing" secondItem="Sor-dr-iIm" secondAttribute="trailing" id="VYu-wZ-tnj"/>
+                                            <constraint firstItem="Sor-dr-iIm" firstAttribute="leading" secondItem="9bJ-Vg-oGS" secondAttribute="trailing" id="WQB-ED-RBg"/>
+                                            <constraint firstItem="9bJ-Vg-oGS" firstAttribute="leading" secondItem="DeB-bx-62w" secondAttribute="leading" id="nCr-CU-yUs"/>
+                                            <constraint firstAttribute="bottom" secondItem="Sor-dr-iIm" secondAttribute="bottom" id="ozI-kQ-Hqs"/>
+                                            <constraint firstItem="Sor-dr-iIm" firstAttribute="top" secondItem="DeB-bx-62w" secondAttribute="top" id="ux7-Dv-baj"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZX-Cf-2kc">
+                                        <rect key="frame" x="0.0" y="440" width="374" height="88"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="30"/>
+                                        <state key="normal" title="Continue">
+                                            <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="H8F-Yc-n6c" firstAttribute="trailing" secondItem="aeq-ef-itX" secondAttribute="trailing" constant="20" id="1x3-Ac-tG2"/>
+                            <constraint firstItem="hFv-uh-D4Y" firstAttribute="leading" secondItem="H8F-Yc-n6c" secondAttribute="leading" constant="20" id="67Y-ms-vfG"/>
+                            <constraint firstItem="aeq-ef-itX" firstAttribute="top" secondItem="H8F-Yc-n6c" secondAttribute="top" constant="20" id="Aj6-S9-LjY"/>
+                            <constraint firstItem="hFv-uh-D4Y" firstAttribute="top" secondItem="aeq-ef-itX" secondAttribute="bottom" id="Rb1-de-QxC"/>
+                            <constraint firstItem="H8F-Yc-n6c" firstAttribute="trailing" secondItem="hFv-uh-D4Y" secondAttribute="trailing" constant="20" id="g3Y-RD-fvO"/>
+                            <constraint firstItem="H8F-Yc-n6c" firstAttribute="bottom" secondItem="hFv-uh-D4Y" secondAttribute="bottom" constant="20" id="oeV-s1-jKy"/>
+                            <constraint firstItem="aeq-ef-itX" firstAttribute="height" secondItem="H8F-Yc-n6c" secondAttribute="height" multiplier="0.29703" id="ogN-EC-bqR"/>
+                            <constraint firstItem="aeq-ef-itX" firstAttribute="leading" secondItem="VLY-Ww-O4M" secondAttribute="leading" constant="20" id="tsW-v2-Y2I"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="H8F-Yc-n6c"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="YdB-XD-n1Q"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UOK-9Z-n61" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="864" y="130"/>
         </scene>
     </scenes>
 </document>

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import StoreKit
 
 let SOLVE_ANIMATION_DURATION = 0.6
 let SOLVE_ANIMATION_DELAY: TimeInterval = 0
@@ -51,13 +52,13 @@ class SolveAlgorithms {
     
     static func checkStartConditions() -> Bool {
         if SolveAlgorithms.startNode == nil {
-            ViewController.showAlert(title: "No Start Node Found!", message: "Please add a start node with the draw start node tool.")
+            ViewController.showAlert(title: "No Start Node Found!", message: "Please add a start node with the draw start node tool.", handler: nil)
             ViewController.gridIsLocked = false
             return false
         }
         
         else if SolveAlgorithms.endNode == nil {
-            ViewController.showAlert(title: "No End Node Found!", message: "Please add an end node with the draw end node tool.")
+            ViewController.showAlert(title: "No End Node Found!", message: "Please add an end node with the draw end node tool.", handler: nil)
             ViewController.gridIsLocked = false
             return false
         }
@@ -124,7 +125,7 @@ class SolveAlgorithms {
         var currentNode = SolveAlgorithms.endNode!.parent
         
         if currentNode == nil {
-            ViewController.showAlert(title: "No Path Found.", message: "There is no path present from the start node to the end node.")
+            ViewController.showAlert(title: "No Path Found.", message: "There is no path present from the start node to the end node.", handler: nil)
             return
         }
         
@@ -136,11 +137,15 @@ class SolveAlgorithms {
         }
         
         if ViewController.solveAlgorithm == .BFS {
-            ViewController.showAlert(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.")
+            ViewController.showAlert(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.", handler: { action in
+                SKStoreReviewController.requestReview()
+            })
         }
         
         else if ViewController.solveAlgorithm == .DFS {
-            ViewController.showAlert(title: "A Path Was Found!", message: "It is displayed in teal on the grid.")
+            ViewController.showAlert(title: "A Path Was Found!", message: "It is displayed in teal on the grid.", handler: { action in
+                SKStoreReviewController.requestReview()
+            })
         }
     }
     

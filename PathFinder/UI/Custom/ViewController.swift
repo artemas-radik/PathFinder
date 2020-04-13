@@ -52,10 +52,10 @@ class ViewController: UIViewController {
     }
     
     //MARK: Utilities
-    static func showAlert(title: String, message: String) {
+    static func showAlert(title: String, message: String, handler: ((UIAlertAction) -> Void)?) {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default))
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: handler))
             
             if !ViewController.threadIsCancelled {
                 ViewController.viewController!.present(alertController, animated: true, completion: nil)
