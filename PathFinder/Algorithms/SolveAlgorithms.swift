@@ -15,6 +15,7 @@ let SOLVE_ANIMATION_DELAY: TimeInterval = 0
 let SOLVE_ANIMATION_SPRING_WITH_DAMPING: CGFloat = 0.5
 let SOLVE_ANIMATION_INITIAL_SPRING_VELOCITY: CGFloat = 6
 let SOLVE_ANIMATION_X_Y_SCALE: CGFloat = 1.6
+var reviewRequested = false
 
 enum SolveAlgorithm {
     case DFS
@@ -138,14 +139,21 @@ class SolveAlgorithms {
         
         if ViewController.solveAlgorithm == .BFS {
             ViewController.showAlert(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.", handler: { action in
-                SKStoreReviewController.requestReview()
+                requestReview()
             })
         }
         
         else if ViewController.solveAlgorithm == .DFS {
             ViewController.showAlert(title: "A Path Was Found!", message: "It is displayed in teal on the grid.", handler: { action in
-                SKStoreReviewController.requestReview()
+                requestReview()
             })
+        }
+    }
+    
+    static func requestReview() {
+        if !reviewRequested {
+            SKStoreReviewController.requestReview()
+            reviewRequested = true
         }
     }
     
