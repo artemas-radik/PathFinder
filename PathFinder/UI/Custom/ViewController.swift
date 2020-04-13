@@ -44,6 +44,11 @@ class ViewController: UIViewController {
     
     //MARK: View Did Load
     override func viewDidLoad() {
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "goToSplashScreen", sender: nil)
+        }
+        
         super.viewDidLoad()
         ViewController.viewController = self
         initializeGridStacks()
