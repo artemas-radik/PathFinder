@@ -63,7 +63,7 @@
                                     <constraint firstAttribute="height" constant="60" id="bYb-HA-xQK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="20"/>
-                                <state key="normal" title="Continue">
+                                <state key="normal" title="Dismiss">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
