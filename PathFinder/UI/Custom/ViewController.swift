@@ -85,16 +85,16 @@ class ViewController: UIViewController {
     
     func respondToTouch(touch: UITouch) {
         
-        if ViewController.gridIsLocked {
-            ViewController.showAlert(title: "Grid Is Locked!", message: "The grid is locked. You cannot draw while the grid is locked. If you wish to see a different algorithm in action on the same grid, just reselect your algorithm.", handler: nil)
-            return
-        }
-        
         for nodeRow in SolveAlgorithms.nodes {
             for node in nodeRow {
                 if node.view.frame.contains(touch.location(in: node.view.superview)) {
                     
 //                    node.view.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+                    
+                    if ViewController.gridIsLocked {
+                        ViewController.showAlert(title: "Grid Is Locked!", message: "The grid is locked. You cannot draw while the grid is locked. If you wish to see a different algorithm in action on the same grid, just reselect your algorithm.", handler: nil)
+                        return
+                    }
                     
                     if node !== mostRecentNode {
                         let generator = UIImpactFeedbackGenerator(style: .medium)
