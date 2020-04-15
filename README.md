@@ -1,5 +1,5 @@
 # PathFinder
-Path Finder is a pathfinder algorithm visualizer. This means you can visualize your favorite pathfinding algorithms such as Breadth First Search and Depth First Search as they attempt to find a path though a graph, custom drawn by you.
+Ever use Google maps? Well, Google maps uses a type of pathfinding algorithm in order to route you from your origin to your destination. PathFinder is simply a tool that visualizes how these types of pathfinding algorithms work. With PathFinder, you can visualize how the Breadth First Search and Depth First Search pathfinding algorithms operate upon your own custom drawn graphs.
 
 ## SCREENSHOTS
 
