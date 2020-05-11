@@ -42,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C70180132469FDAE0031EA3F /* PathFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PathFinder.entitlements; sourceTree = "<group>"; };
 		C708041C243D3BC20033A727 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		C72B5091243BA03800334E80 /* SolveAlgorithms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolveAlgorithms.swift; sourceTree = "<group>"; };
 		C783E8B9243BBE1C0056807F /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -147,6 +148,7 @@
 		C7D425B8242930B5001CE9E7 /* PathFinder */ = {
 			isa = PBXGroup;
 			children = (
+				C70180132469FDAE0031EA3F /* PathFinder.entitlements */,
 				C783E8C1243BC8360056807F /* UI */,
 				C783E8C0243BC80D0056807F /* Algorithms */,
 				C7D425C2242930C3001CE9E7 /* Assets.xcassets */,
@@ -486,6 +488,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PathFinder/PathFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 32F8FK43RT;
 				INFOPLIST_FILE = PathFinder/Info.plist;
@@ -497,6 +500,7 @@
 				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aradik.PathFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -506,6 +510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PathFinder/PathFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 32F8FK43RT;
 				INFOPLIST_FILE = PathFinder/Info.plist;
@@ -517,6 +522,7 @@
 				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aradik.PathFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
