@@ -14,7 +14,13 @@ class ViewController: UIViewController {
     let GRID_SIZE = 12
     let GRID_GAP_SIZE = 1
     let GRID_NODE_CORNER_RADIUS = 3
-    let TEXT_SIZE = (1.2/71) * UIScreen.main.bounds.height
+    
+    #if targetEnvironment(macCatalyst)
+        let TEXT_SIZE = (2.4/71) * UIScreen.main.bounds.height
+    #else
+        let TEXT_SIZE = (1.2/71) * UIScreen.main.bounds.height
+    #endif
+    
     let CONTROL_BUTTON_CORNER_RADIUS = 10
     let BIG_STACK_SPACING = 5
     let SMALL_STACK_SPACING = 1
