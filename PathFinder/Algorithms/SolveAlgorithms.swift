@@ -333,7 +333,7 @@ class SolveAlgorithms {
     static func asyncDFSrecursiveHelper(nextCoordinates: (Int, Int), currentCoordinates: (Int, Int)) -> Bool {
         var isDone = false
         nodeAt(coordinates: nextCoordinates).parent = nodeAt(coordinates: currentCoordinates)
-        SolveAlgorithms.updateNode(node: nodeAt(coordinates: nextCoordinates), color: UIColor.systemYellow)
+        SolveAlgorithms.updateNode(node: nodeAt(coordinates: nextCoordinates), color: UIColor.systemGreen)
         usleep(useconds_t(SolveAlgorithms.speed))
         isDone = asyncDFSrecursive(currentCoordinates: nextCoordinates)
         
