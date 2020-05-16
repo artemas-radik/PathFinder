@@ -250,8 +250,9 @@ class ViewController: UIViewController {
         let algorithmButtonStack = initializeCustomStack(axis: .horizontal, spacing: OPTION_STACK_SPACING)
         algorithmStack.addArrangedSubview(algorithmButtonStack)
         
-        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Breadth-First-Search", color: UIColor.systemOrange, alpha: CONTROL_BUTTON_ALPHA_MAX))
-        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "Depth-First-Search", color: UIColor.systemOrange))
+        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "BFS", color: UIColor.systemOrange, alpha: CONTROL_BUTTON_ALPHA_MAX))
+        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "DFS", color: UIColor.systemOrange))
+        algorithmButtonStack.addArrangedSubview(initializeCustomButton(title: "A*", color: UIColor.systemOrange))
         
         //Speed Stack
         let speedStack = initializeCustomStack(axis: .vertical, spacing: SMALL_STACK_SPACING)
@@ -300,7 +301,7 @@ class ViewController: UIViewController {
                 ViewController.drawtype = .start
             case "End":
                 ViewController.drawtype = .end
-            case "Depth-First-Search":
+            case "DFS":
                 ViewController.solveAlgorithm = .DFS
                 
                 if ViewController.gridIsLocked {
@@ -308,8 +309,16 @@ class ViewController: UIViewController {
                     ViewController.gridIsLocked = false
                 }
             
-            case "Breadth-First-Search":
+            case "BFS":
                 ViewController.solveAlgorithm = .BFS
+                
+                if ViewController.gridIsLocked {
+                    SolveAlgorithms.revert()
+                    ViewController.gridIsLocked = false
+                }
+            
+            case "A*":
+                ViewController.solveAlgorithm = .Astar
                 
                 if ViewController.gridIsLocked {
                     SolveAlgorithms.revert()
@@ -339,6 +348,10 @@ class ViewController: UIViewController {
                     thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncDFS), object: nil)
                 }
                 
+                else if ViewController.solveAlgorithm == .Astar {
+                    thread = Thread.init(target: SolveAlgorithms.self, selector: #selector(SolveAlgorithms.asyncAstar), object: nil)
+                }
+                
                 thread!.start()
                 return
             
@@ -359,7 +372,7 @@ class ViewController: UIViewController {
     
     @objc func controlButtonTouchDown(sender: UIButton!) {
         
-        if ViewController.gridIsLocked && (sender.titleLabel?.text == "Depth-First-Search" || sender.titleLabel?.text == "Breadth-First-Search") {
+        if ViewController.gridIsLocked && (sender.titleLabel?.text == "DFS" || sender.titleLabel?.text == "BFS" || sender.titleLabel?.text == "A*") {
             return
         }
         
@@ -372,7 +385,7 @@ class ViewController: UIViewController {
     
     @objc func controlButtonTouchDragExit(sender: UIButton!) {
         
-        if ViewController.gridIsLocked && (sender.titleLabel?.text == "Depth-First-Search" || sender.titleLabel?.text == "Breadth-First-Search") {
+        if ViewController.gridIsLocked && (sender.titleLabel?.text == "DFS" || sender.titleLabel?.text == "BFS" || sender.titleLabel?.text == "A*") {
             return
         }
         

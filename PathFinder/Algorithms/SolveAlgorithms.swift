@@ -20,6 +20,7 @@ var reviewRequested = false
 enum SolveAlgorithm {
     case DFS
     case BFS
+    case Astar
 }
 
 class SolveAlgorithms {
@@ -39,6 +40,9 @@ class SolveAlgorithms {
                 node.isVisited = false
                 node.type = .space
                 node.parent = nil
+                node.f = nil
+                node.g = nil
+                node.h = nil
                 
                 DispatchQueue.main.async {
                     node.view.backgroundColor = UIColor.systemFill
@@ -58,6 +62,9 @@ class SolveAlgorithms {
             for node in nodeRow {
                 node.isVisited = false
                 node.parent = nil
+                node.f = nil
+                node.g = nil
+                node.h = nil
                 
                 DispatchQueue.main.async {
                     
@@ -138,6 +145,20 @@ class SolveAlgorithms {
         return (startNodeCoordinates.0!, startNodeCoordinates.1!)
     }
     
+    static func getEndNodeCoordinates() -> (Int, Int) {
+        var endNodeCoordinates: (Int?, Int?) = (nil, nil)
+        
+        for row in 0...SolveAlgorithms.nodes.count-1 {
+            for column in 0...SolveAlgorithms.nodes[row].count-1 {
+                if SolveAlgorithms.nodes[row][column].type == .end {
+                    endNodeCoordinates = (row, column)
+                }
+            }
+        }
+        
+        return (endNodeCoordinates.0!, endNodeCoordinates.1!)
+    }
+    
     static func findSolutionPath() {
         
         if ViewController.threadIsCancelled {
@@ -166,6 +187,12 @@ class SolveAlgorithms {
         
         else if ViewController.solveAlgorithm == .DFS {
             ViewController.showAlert(title: "A Path Was Found!", message: "It is displayed in teal on the grid.", handler: { action in
+                requestReview()
+            })
+        }
+        
+        else if ViewController.solveAlgorithm == .Astar {
+            ViewController.showAlert(title: "The Shortest Path Was Found!", message: "It is displayed in teal on the grid.", handler: { action in
                 requestReview()
             })
         }
@@ -306,7 +333,7 @@ class SolveAlgorithms {
     static func asyncDFSrecursiveHelper(nextCoordinates: (Int, Int), currentCoordinates: (Int, Int)) -> Bool {
         var isDone = false
         nodeAt(coordinates: nextCoordinates).parent = nodeAt(coordinates: currentCoordinates)
-        SolveAlgorithms.updateNode(node: nodeAt(coordinates: nextCoordinates), color: UIColor.systemGreen)
+        SolveAlgorithms.updateNode(node: nodeAt(coordinates: nextCoordinates), color: UIColor.systemYellow)
         usleep(useconds_t(SolveAlgorithms.speed))
         isDone = asyncDFSrecursive(currentCoordinates: nextCoordinates)
         
@@ -316,4 +343,169 @@ class SolveAlgorithms {
             
         return false
     }
+    
+    //MARK: asyncAstar
+    @objc static func asyncAstar() {
+        
+        if ViewController.threadIsCancelled {
+            SolveAlgorithms.revert()
+            return
+        }
+        
+        if !checkStartConditions() {
+            return
+        }
+        
+        var openList: [(Int, Int)] = [getStartNodeCoordinates()]
+        var closedList: [(Int, Int)] = []
+        
+        startNode!.g = 0
+        startNode!.h = SolveAlgorithms.calculateH(coordinates: getStartNodeCoordinates())
+        startNode!.f = startNode!.g! + startNode!.h!
+        
+        while(true) {
+            
+            if ViewController.threadIsCancelled {
+                SolveAlgorithms.revert()
+                return
+            }
+            
+            if openList.count == 0 {
+                findSolutionPath()
+                return
+            }
+            
+            var currentCoordinates = openList[0]
+            
+            for node in openList {
+                if SolveAlgorithms.nodeAt(coordinates: node).f! < SolveAlgorithms.nodeAt(coordinates: currentCoordinates).f! {
+                    currentCoordinates = node
+                }
+            }
+            
+            SolveAlgorithms.remove(list: &openList, element: currentCoordinates)
+            closedList.append(currentCoordinates)
+            
+            if currentCoordinates == getEndNodeCoordinates() {
+                break
+            }
+            
+            if ViewController.threadIsCancelled {
+                SolveAlgorithms.revert()
+                return
+            }
+            
+            updateNode(node: nodeAt(coordinates: currentCoordinates), color: UIColor.systemGreen)
+            usleep(useconds_t(SolveAlgorithms.speed))
+            
+            //gen children
+            
+            //go right
+            let rightCoordinates = (currentCoordinates.0, currentCoordinates.1+1)
+            if rightCoordinates.1 <= SolveAlgorithms.nodes[rightCoordinates.0].count-1 && nodeIsNotVisitedOrWall(coordinates: rightCoordinates) {
+                asyncAstarHelper(openList: &openList, closedList: closedList, currentCoordinates: currentCoordinates, nextCoordinates: rightCoordinates)
+            }
+            
+            //go up
+            let upCoordinates = (currentCoordinates.0-1, currentCoordinates.1)
+            if upCoordinates.0 >= 0 && nodeIsNotVisitedOrWall(coordinates: upCoordinates) {
+                asyncAstarHelper(openList: &openList, closedList: closedList, currentCoordinates: currentCoordinates, nextCoordinates: upCoordinates)
+            }
+            
+            // go left
+            let leftCoordinates = (currentCoordinates.0, currentCoordinates.1-1)
+            if leftCoordinates.1 >= 0 && nodeIsNotVisitedOrWall(coordinates: leftCoordinates) {
+                asyncAstarHelper(openList: &openList, closedList: closedList, currentCoordinates: currentCoordinates, nextCoordinates: leftCoordinates)
+            }
+            
+            //go down
+            let downCoordinates = (currentCoordinates.0+1, currentCoordinates.1)
+            if downCoordinates.0 <= SolveAlgorithms.nodes.count-1 && nodeIsNotVisitedOrWall(coordinates: downCoordinates) {
+                asyncAstarHelper(openList: &openList, closedList: closedList, currentCoordinates: currentCoordinates, nextCoordinates: downCoordinates)
+            }
+            
+        }
+        
+        findSolutionPath()
+    }
+    
+    static func asyncAstarHelper(openList: inout [(Int, Int)], closedList: [(Int, Int)], currentCoordinates: (Int, Int), nextCoordinates: (Int, Int)) {
+        
+        if ViewController.threadIsCancelled {
+            SolveAlgorithms.revert()
+            return
+        }
+        
+        if nodeAt(coordinates: nextCoordinates).parent == nil {
+            nodeAt(coordinates: nextCoordinates).parent = nodeAt(coordinates: currentCoordinates)
+        }
+        
+        updateNode(node: nodeAt(coordinates: nextCoordinates), color: UIColor.systemYellow)
+        usleep(useconds_t(SolveAlgorithms.speed))
+        
+        if SolveAlgorithms.listContains(list: closedList, element: nextCoordinates) {
+            return
+        }
+        
+        if ViewController.threadIsCancelled {
+            SolveAlgorithms.revert()
+            return
+        }
+        
+        nodeAt(coordinates: nextCoordinates).g = nodeAt(coordinates: currentCoordinates).g! + 1
+        nodeAt(coordinates: nextCoordinates).h = calculateH(coordinates: nextCoordinates)
+        nodeAt(coordinates: nextCoordinates).f = nodeAt(coordinates: nextCoordinates).g! + nodeAt(coordinates: nextCoordinates).h!
+        
+        if ViewController.threadIsCancelled {
+            SolveAlgorithms.revert()
+            return
+        }
+        
+        if listContains(list: openList, element: nextCoordinates) {
+            return
+        }
+        
+        openList.append(nextCoordinates)
+        
+        
+//        if nodeAt(coordinates: nextCoordinates).g != nil && nodeAt(coordinates: currentCoordinates).g != nil {
+//            if nodeAt(coordinates: nextCoordinates).g! < nodeAt(coordinates: currentCoordinates).g! && SolveAlgorithms.listContains(list: closedList, element: nextCoordinates) {
+//                nodeAt(coordinates: nextCoordinates).g = nodeAt(coordinates: currentCoordinates).g!
+//                nodeAt(coordinates: nextCoordinates).parent = nodeAt(coordinates: currentCoordinates)
+//            }
+//            
+//            else if nodeAt(coordinates: nextCoordinates).g! > nodeAt(coordinates: currentCoordinates).g! && SolveAlgorithms.listContains(list: openList, element: nextCoordinates) {
+//                nodeAt(coordinates: nextCoordinates).g = nodeAt(coordinates: currentCoordinates).g!
+//                nodeAt(coordinates: nextCoordinates).parent = nodeAt(coordinates: currentCoordinates)
+//            }
+//            
+//        }
+        
+        
+        
+    }
+    
+    static func calculateH(coordinates: (Int, Int)) -> Int {
+        let endNodeCoordinates = SolveAlgorithms.getEndNodeCoordinates()
+        return abs(coordinates.0 - endNodeCoordinates.0) + abs(coordinates.1 - endNodeCoordinates.1)
+    }
+    
+    static func listContains(list: [(Int, Int)], element: (Int, Int)) -> Bool {
+        for item in list {
+            if item == element {
+                return true
+            }
+        }
+        return false
+    }
+    
+    static func remove(list: inout [(Int, Int)], element: (Int, Int)) {
+        for x in 0..<list.count {
+            if list[x] == element {
+                list.remove(at: x)
+                return
+            }
+        }
+    }
+    
 }

@@ -23,6 +23,10 @@ class Node {
     var isVisited: Bool = false
     var parent: Node? = nil
     
+    var f: Int?
+    var g: Int?
+    var h: Int?
+    
     init(view: UIView) {
         self.view = view
     }
