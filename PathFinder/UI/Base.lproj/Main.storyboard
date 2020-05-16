@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_5" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="LexendDeca-Regular.ttf">
-            <string>LexendDeca-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -22,81 +17,10 @@
                         <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <connections>
-                        <segue destination="gHv-cb-xfS" kind="show" identifier="goToSplashScreen" id="NA8-9H-npG"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-57.971014492753625" y="129.91071428571428"/>
-        </scene>
-        <!--Splash Screen View Controller-->
-        <scene sceneID="uBX-1j-PEh">
-            <objects>
-                <viewController id="gHv-cb-xfS" customClass="SplashScreenViewController" customModule="PathFinder" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VLY-Ww-O4M">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="aeq-ef-itX">
-                                <rect key="frame" x="41.333333333333343" y="20.000000000000028" width="331.33333333333326" height="484.66666666666674"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Welcome To PathFinder!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6k-rg-J7S">
-                                        <rect key="frame" x="0.0" y="0.0" width="331.33333333333331" height="242.33333333333334"/>
-                                        <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="50"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0m3-yg-Z8z">
-                                        <rect key="frame" x="0.0" y="242.33333333333331" width="331.33333333333331" height="242.33333333333331"/>
-                                        <string key="text">PathFinder is an algorithm visualizer for the Breadth First Search and Depth First Search pathfinding algorithms.\n\nTo begin, draw walls on the grid using the wall draw tool. Make sure you add a start node and end node as well. Select a solve algorithm, hit the find path button, and watch magic happen!\n\nFeel free to drop a review, and enjoy :)</string>
-                                        <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNd-0d-e8r">
-                                <rect key="frame" x="20" y="728" width="374" height="60"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="bYb-HA-xQK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="LexendDeca-Regular" family="Lexend Deca" pointSize="20"/>
-                                <state key="normal" title="Dismiss">
-                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="16"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="continueButton:" destination="gHv-cb-xfS" eventType="touchUpInside" id="oRx-Zb-0tp"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="aeq-ef-itX" firstAttribute="height" secondItem="H8F-Yc-n6c" secondAttribute="height" multiplier="0.6" id="7W4-2t-exb"/>
-                            <constraint firstItem="aeq-ef-itX" firstAttribute="top" secondItem="H8F-Yc-n6c" secondAttribute="top" constant="20" id="Aj6-S9-LjY"/>
-                            <constraint firstItem="dNd-0d-e8r" firstAttribute="leading" secondItem="H8F-Yc-n6c" secondAttribute="leading" constant="20" id="EJi-AD-nxg"/>
-                            <constraint firstItem="H8F-Yc-n6c" firstAttribute="bottom" secondItem="dNd-0d-e8r" secondAttribute="bottom" constant="20" id="Gwr-B7-mGR"/>
-                            <constraint firstItem="aeq-ef-itX" firstAttribute="width" secondItem="H8F-Yc-n6c" secondAttribute="width" multiplier="0.8" id="SuE-a7-3wQ"/>
-                            <constraint firstItem="H8F-Yc-n6c" firstAttribute="trailing" secondItem="dNd-0d-e8r" secondAttribute="trailing" constant="20" id="dTl-ze-NUE"/>
-                            <constraint firstItem="aeq-ef-itX" firstAttribute="centerX" secondItem="VLY-Ww-O4M" secondAttribute="centerX" id="iU9-n0-3xv"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="H8F-Yc-n6c"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="YdB-XD-n1Q"/>
-                    <connections>
-                        <outletCollection property="labels" destination="0m3-yg-Z8z" collectionClass="NSMutableArray" id="kCU-bD-rng"/>
-                        <outletCollection property="labels" destination="C6k-rg-J7S" collectionClass="NSMutableArray" id="ice-hn-Rbc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UOK-9Z-n61" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="863.768115942029" y="129.91071428571428"/>
         </scene>
     </scenes>
 </document>

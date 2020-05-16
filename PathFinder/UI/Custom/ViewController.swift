@@ -43,6 +43,7 @@ class ViewController: UIViewController {
     
     static var drawtype: Node.NodeType = .wall
     static var gridIsLocked = false
+    static var initialLock = true
     
     static var threadIsCancelled = true
     
@@ -52,7 +53,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         
         DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "goToSplashScreen", sender: nil)
+            ViewController.initialLock = true
+            self.present(SplashScreenViewController(), animated: true, completion: nil)
         }
         
         super.viewDidLoad()
@@ -90,6 +92,10 @@ class ViewController: UIViewController {
     var mostRecentNode: Node? = nil
     
     func respondToTouch(touch: UITouch) {
+        
+        if ViewController.initialLock {
+            return
+        }
         
         for nodeRow in SolveAlgorithms.nodes {
             for node in nodeRow {
