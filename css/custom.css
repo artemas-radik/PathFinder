@@ -24,3 +24,10 @@ width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
+
+html, body {
+  overflow-x: hidden;
+}
+body {
+  position: relative
+}
