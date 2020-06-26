@@ -31,3 +31,9 @@ html, body {
 body {
   position: relative
 }
+
+@media screen and (max-width: 430px) {
+  h1 {
+    font-size: 30px;
+  }
+}
