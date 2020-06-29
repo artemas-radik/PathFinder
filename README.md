@@ -5,7 +5,9 @@ Ever use Google maps? Well, Google maps uses a type of pathfinding algorithm in 
 <br>
 [Download on the App Store](https://apps.apple.com/us/app/pathfinder-visualizer/id1507723797?mt=8)
 
-![](https://github.com/ajradik/PathFinder/blob/master/screenshots/PathFinder-screenshot-edited.png)
+<p align="center">
+    <img src="https://github.com/ajradik/PathFinder/blob/master/screenshots/PathFinder-screenshot-edited.png" width="400">
+</p>
 
 ## Contributing Guidelines
 
@@ -65,6 +67,6 @@ Enormous pull requests take a significant time to review and understand their im
 ### Questions and Contact
 
 If any of the sections above are unclear and require further explanation, *do not hesitate to reach out*.
-MessageKit strives to build an inclusive open source community and to make contributing as easy as possible for members of all experience levels.
+PathFinder Visualizer strives to build an inclusive open source community and to make contributing as easy as possible for members of all experience levels.
 
 **You can get in touch with the PathFinder team directly by joining our open Discord community server: [here](https://discord.gg/HubdCgG).**
